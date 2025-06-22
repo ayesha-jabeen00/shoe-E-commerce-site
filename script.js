@@ -278,6 +278,3 @@ function goHome() {
 
 
 
-
-
- 
