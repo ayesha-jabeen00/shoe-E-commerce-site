@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Favorites</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+
+    .back-top-btn {
+      margin-bottom: 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .back-top-btn:hover {
+      background-color: #222;
+    }
+
+    .back-top-btn i {
+      margin-right: 8px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      color: #333;
+    }
+
+    .fav-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .fav-card {
+      width: 250px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s ease-in-out;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fav-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .fav-card h4 {
+      margin: 10px 0 5px;
+      text-align: center;
+      font-size: 1rem;
+      color: #222;
+    }
+
+    .fav-card .stars {
+      color: #ffa500;
+      margin: 5px 0;
+    }
+
+    .fav-card .price {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #f24e4e;
+    }
+
+    .fav-card button {
+      background: #66a6ff;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .fav-card button:hover {
+      background: #4e8eff;
+    }
+
+    .remove-btn {
+      background: #f24e4e !important;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .fav-card {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      body {
+        padding: 16px;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Back Button -->
+  <button class="back-top-btn" onclick="goHome()">
+    <i class="fas fa-arrow-left"></i> Back to Home
+  </button>
+
+  <h2>Your Favorite Products</h2>
+  <div class="fav-container" id="favContainer"></div>
+
+  <!-- JavaScript -->
+  <script>
+    function goHome() {
+      window.location.href = "index.html";
+    }
+
+    const favContainer = document.getElementById("favContainer");
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    function renderFavorites() {
+      favContainer.innerHTML = "";
+      if (favorites.length === 0) {
+        favContainer.innerHTML = "<p>No favorite products found.</p>";
+        return;
+      }
+
+      favorites.forEach((product, index) => {
+        favContainer.innerHTML += `
+          <div class="fav-card" data-index="${index}">
+            <img src="${product.img || product.image}" alt="${product.name || product.title}">
+            <h4>${product.name || product.title}</h4>
+            <div class="stars">${"★".repeat(product.rating || 5)}</div>
+            <div class="price">₹${product.price}</div>
+            <button onclick='addToCart(${JSON.stringify(product)}, ${index})'>Add to Cart</button>
+            <button class="remove-btn" onclick='removeFromFavorites(${index})'>Remove</button>
+          </div>
+        `;
+      });
+    }
+
+    function addToCart(product, index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      favorites.splice(index, 1);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      renderFavorites();
+    }
+
+    function removeFromFavorites(index) {
+      favorites.splice(index, 1);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      renderFavorites();
+    }
+
+    renderFavorites();
+  </script>
+</body>
+</html>

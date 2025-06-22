@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    .back-top-btn {
+      margin-bottom: 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+
+    .back-top-btn:hover {
+      background-color: #222;
+    }
+    .back-top-btn i {
+      margin-right: 8px;
+    }
+
+
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .cart-items {
+      flex: 1 1 60%;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .item img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .item-details {
+      flex: 1;
+      margin-left: 15px;
+    }
+
+    .item-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .price {
+      color: #f24e4e;
+      font-weight: bold;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .controls button {
+      padding: 6px 10px;
+      border: none;
+      background: #f24e4e;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .delete-btn {
+      color: #f24e4e;
+      font-size: 18px;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+     @keyframes fadeOut {
+    from {opacity: 1; transform: scale(1);}
+    to {opacity: 0; transform: scale(0.95);}
+    }
+    .summary {
+      flex: 1 1 35%;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .summary h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+
+    .coupon {
+      margin-top: 20px;
+    }
+
+    .coupon input {
+      padding: 10px;
+      width: 65%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .coupon button {
+      padding: 10px 14px;
+      margin-left: 10px;
+      border: none;
+      background: #f24e4e;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .checkout-btn {
+      margin-top: 30px;
+      width: 100%;
+      padding: 15px;
+      background: #222;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .checkout-btn:hover {
+      background: #111;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .cart-items, .summary {
+        width: 100%;
+      }
+    }
+ 
+
+  </style>
+</head>
+<body onload="loadCartItems()">
+  
+  <!-- Back button -->
+  <button class="back-top-btn" onclick="goHome()">
+  <i class="fas fa-arrow-left"></i> Back to Home
+</button>
+
+
+  <div class="container">
+    <!-- Cart Items -->
+    <div class="cart-items" id="cartItemsContainer">
+      <!-- JS will inject items here -->
+    </div>
+
+    <!-- Order Summary -->
+    <div class="summary">
+      <h2>Order Summary</h2>
+      <div class="summary-item">
+        <span>Subtotal</span>
+        <span id="subtotal">₹0</span>
+      </div>
+      <div class="summary-item">
+        <span>Shipping</span>
+        <span>Free</span>
+      </div>
+      <div class="summary-item">
+        <span>Total</span>
+        <span id="total">₹0</span>
+      </div>
+
+      <div class="coupon">
+        <input type="text" id="couponCode" placeholder="Enter coupon code">
+        <button onclick="applyCoupon()">Apply</button>
+      </div>
+
+      <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    let discount = 0;
+    let quantities = [];
+
+    function loadCartItems() {
+      const container = document.getElementById("cartItemsContainer");
+      container.innerHTML = "";
+      let subtotal = 0;
+      quantities = [];
+
+      if (cartItems.length === 0) {
+        container.innerHTML = `<p>Your cart is empty.</p>`;
+        document.getElementById("subtotal").textContent = "₹0";
+        document.getElementById("total").textContent = "₹0";
+        return;
+      }
+
+      cartItems.forEach((item, index) => {
+        quantities[index] = 1;
+        container.innerHTML += `
+          <div class="item" id="item-${index}">
+            <img src="${item.image}" alt="Product Image">
+            <div class="item-details">
+              <div class="item-title">${item.title}</div>
+              <div class="price">₹${item.price}</div>
+            </div>
+            <div class="controls">
+              <button onclick="changeQty(${index}, -1)">-</button>
+              <span id="qty-${index}">1</span>
+              <button onclick="changeQty(${index}, 1)">+</button>
+              <i class="fas fa-trash delete-btn" onclick="removeItem(${index})"></i>
+            </div>
+          </div>
+        `;
+        subtotal += item.price;
+      });
+
+      updatePrices();
+    }
+
+    function changeQty(index, delta) {
+      quantities[index] = Math.max(1, quantities[index] + delta);
+      document.getElementById(`qty-${index}`).textContent = quantities[index];
+      updatePrices();
+    }
+
+    function updatePrices() {
+      let subtotal = 0;
+      cartItems.forEach((item, index) => {
+        subtotal += item.price * quantities[index];
+      });
+
+      const total = subtotal - discount;
+      document.getElementById("subtotal").textContent = `₹${subtotal}`;
+      document.getElementById("total").textContent = `₹${Math.max(total, 0)}`;
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById('couponCode').value.trim().toLowerCase();
+      if (code === 'save10') {
+        discount = 100;
+        alert("Coupon Applied: ₹100 OFF");
+      } else {
+        discount = 0;
+        alert("Invalid Coupon Code");
+      }
+      updatePrices();
+    }
+
+    function removeItem(index) {
+      cartItems.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      loadCartItems();
+    }
+
+    function goHome() {
+      window.location.href = "index.html";
+    }
+// snippet delet icon
+ function removeItem(index) {
+  const item = document.getElementById(`item-${index}`);
+  item.style.animation = "fadeOut 0.5s ease";
+  setTimeout(() => {
+    cartItems.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+    loadCartItems();
+  }, 400);
+}
+   
+  </script>
+</body>
+</html>

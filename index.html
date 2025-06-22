@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trendz</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">SneakWear</div>
+
+   <nav class="nav-links" id="navLinks">
+  <a href="#">Home</a>
+  <a href="Shop.html">Shop</a>
+  <a href="#blogSection">Blog</a>
+  <div class="dropdown">
+    <a href="#" class="dropdown-toggle" onclick="toggleDropdown()">Pages <i id="caret" class="fas fa-caret-up"></i></a>
+<div id="dropdownMenu" class="dropdown-menu">
+  <a href="#testimonial">Testimonial</a>
+  <a href="#newsletter">Newsletter</a>
+</div>
+  </div>
+  <a href="#contactSection">Contact</a>
+</nav>
+
+
+   <!-- MAIN PAGE ICONS -->
+<div class="icons">
+  <i class="fas fa-search" onclick="toggleSearch()"></i>
+  <i class="fas fa-user" onclick="goToAccount()"></i>
+
+  <!-- Favorite icon -->
+  <a href="favorite.html" class="fav-link" style="position: relative;">
+    <i class="fas fa-heart"></i>
+    <span class="fav-count" id="favCount" style="display: none;" >0</span>
+  </a>
+
+  <!-- Cart icon -->
+  <a href="cart.html" class="cart-link" style="position: relative;">
+    <i class="fas fa-shopping-bag" id="cart-icon"></i>
+    <span class="cart-count" id="cart-count" style="display: none;">0</span>
+  </a>
+</div>
+
+
+    <!-- Search bar -->
+    <div class="search-container" id="searchBox">
+      <input type="text" placeholder="Search products..." />
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+</header>
+
+ <section class="carousel">
+  <div class="carousel-track" id="track">
+    
+    <!-- Slide 1 -->
+    <div class="carousel-slide" style="background-image: url('https://res.cloudinary.com/dxtmzketd/image/upload/v1749665767/image_shoe_1_v9zl0r.png');">
+      <div class="content">
+        <h4>2025 LIMITED EDITION</h4>
+        <h1>Adidas Sport Running Shoes For Men</h1>
+         <a href="shop.html"><button>Shop Now</button></a>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-slide" style="background-image: url('https://res.cloudinary.com/dxtmzketd/image/upload/c_crop,w_1000,h_900/v1749734714/freepik__the-style-is-candid-image-photography-with-natural__98217_w3ulvx.jpg');">
+      <div class="content">
+        <h4>2025 LIMITED EDITION</h4>
+        <h1>Step Into the Future — 2025 Training Shoe</h1>
+        <p>Men’s Round Toe · Memory Foam · Lightweight Sneakers</p>
+         <a href="shop.html"><button>Shop Now</button></a>
+      </div>
+    </div>
+
+    <!-- You can add more slides like this -->
+
+  </div>
+</section>
+
+    <div class="carousel-dots" id="dots">
+      <span class="dot active" onclick="moveToSlide(0)"></span>
+      <span class="dot  " onclick="moveToSlide(0)"></span>
+      <!-- Add more dot spans for more slides -->
+    </div>
+  </section>
+  <!-- brand names -->
+   <section class="brand-carousel">
+  <div class="brand-track" id="brandTrack">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1749737546/new_balance_shoe_logo-removebg-preview_cafoem.png" alt="New Balance" />
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1749737817/logo_converse-removebg-preview_floh6k.png" alt="Converse" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" alt="Adidas" />
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1749737300/reebok_logo-removebg-preview_cn1owc.png" alt="Reebok" />
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1749737294/asics_logo-removebg-preview_tb8vmu.png" alt="Asics" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike" />
+     <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1749737292/Puma-Logo-tumb-removebg-preview_y9hk2f.png" alt="puma" />
+  </div>
+</section>
+
+<!-- latest product -->
+ <section class="latest-products">
+  <h2>LATEST PRODUCTS</h2>
+  <div class="carousel-wrapper">
+  <div class="products-container">
+    <!-- card 1 -->
+ <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'reebok1',
+    title: 'Reebok Running Shoes',
+    price: 2599,
+    image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg',
+    imageBack: 'https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg',
+    brand: 'Reebok',
+    description: 'These premium black and white sneakers offer unmatched comfort and style for everyday use or workouts.'
+  })">
+    <img src="https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'reebok1',
+        title: 'Reebok Running Shoes',
+        price: 2599,
+        image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'reebok1',
+        title: 'Reebok Running Shoes',
+        price: 2599,
+        image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Reebok</h4>
+    <p>Reebok Running Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹3,599</span>
+  ₹2,599
+  </div>
+  </div>
+</a>
+
+
+
+    <!-- card 2 -->
+ <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'Adidas2',
+    title: 'Adidas Sport Shoes',
+    price: 1599,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg',
+    brand: 'Adidas',
+    description: 'Step into comfort and performance with these Adidas sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Adidas2',
+        title: 'Adidas Sport Shoes',
+        price: 1599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Adidas2',
+        title: 'Adidas Sport Shoes',
+        price: 1599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Adidas</h4>
+    <p>Adidas Sport Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹2,599</span>
+  ₹1,599
+  </div>
+  </div>
+</a>
+
+
+    <!-- card 3 -->
+ <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'Nike2',
+    title: 'Nike Sport Shoes',
+    price: 1799,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp',
+    brand: 'Nike',
+    description: 'Step into comfort and performance with these Reebok sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Nike2',
+        title: 'Nike Sport Shoes',
+        price: 1799,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Nike2',
+        title: 'Nike Sport Shoes',
+        price: 1799,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Nike</h4>
+    <p>Nike Sport Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹2,599</span>
+  ₹1,799
+  </div>
+  </div>
+</a>
+
+
+    <!-- card 4 -->
+   <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'New Balance2',
+    title: 'New Balance running Shoes',
+    price: 2880,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484483/shoe3.2_txen1i.jpg',
+    brand: 'New Balance',
+    description: 'Step into comfort and performance with these Adidas sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484483/shoe3.2_txen1i.jpg" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'New Balance2',
+        title: 'New Balance Running Shoes',
+        price: 2880,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'New Balance2',
+        title: 'New Balance Running Shoes',
+        price: 2880,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>New Balance</h4>
+    <p>New Balance running Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹2,599</span>
+  ₹2880
+  </div>
+  </div>
+</a>
+
+
+    <!-- card 5 -->
+ <a class="product-card">
+  <div class="product-image" onclick="goToProductPage()">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484820/shoe_5.2_f1ws7j.jpg" alt="Shoe Back" class="img-back">
+    
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Puma1',
+        title: 'Puma Running Shoes',
+        price: 2599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Puma1',
+        title: 'Puma Running Shoes',
+        price: 2599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Puma</h4>
+    <p>Puma Running Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹2,599</span>
+  ₹2,599
+  </div>
+  </div>
+</a>
+
+
+    <!-- Copy and modify for more products -->
+  </div>  
+  </div>
+</section>
+
+
+<!-- popular products -->
+ <section class="latest-products" id="popularProducts">
+  <h2>POPULAR PRODUCTS</h2>
+  <div class="carousel-wrapper">
+  <div class="products-container">
+    <!-- card 1 -->
+<a class="product-card">
+  <div class="product-image" onclick="goToProductPage()">
+    <img src="https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg" alt="Shoe Back" class="img-back">
+    
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'reebok1',
+        title: 'Reebok Running Shoes',
+        price: 2599,
+        image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'reebok1',
+        title: 'Reebok Running Shoes',
+        price: 2599,
+        image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>reebok</h4>
+    <p>Reebok Running Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹3,599</span>
+  ₹2,599
+  </div>
+  </div>
+</a>
+
+    <!-- card 2 -->
+    <a class="product-card">
+  <div class="product-image" onclick="goToProductPage()">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484820/shoe_5.2_f1ws7j.jpg" alt="Shoe Back" class="img-back">
+    
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Puma1',
+        title: 'Puma Running Shoes',
+        price: 1599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Puma1',
+        title: 'Puma Running Shoes',
+        price: 1599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Puma</h4>
+    <p>Puma Running Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹2,599</span>
+  ₹1,599
+  </div>
+  </div>
+</a>
+
+
+    <!-- card 3 -->
+     <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'Adidas2',
+    title: 'Adidas Sport Shoes',
+    price: 1799,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg',
+    brand: 'Adidas',
+    description: 'Step into comfort and performance with these Adidas sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Adidas2',
+        title: 'Adidas Sport Shoes',
+        price: 1799,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Adidas2',
+        title: 'Adidas Sport Shoes',
+        price: 1799,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Adidas</h4>
+    <p>Adidas Sport Shoes</p>
+    <div class="stars">★★★★★</div>
+     <div class="price">
+  <span class="old">₹2,599</span>
+  ₹1,799
+  </div>
+  </div>
+</a>
+
+    <!-- card 4 -->
+   <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'New Balance2',
+    title: 'New Balance running Shoes',
+    price: 2580,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484483/shoe3.2_txen1i.jpg',
+    brand: 'New Balance',
+    description: 'Step into comfort and performance with these Adidas sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484483/shoe3.2_txen1i.jpg" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'New Balance2',
+        title: 'New Balance Running Shoes',
+        price:2580,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'New Balance2',
+        title: 'New Balance Running Shoes',
+        price: 2580,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>New Balance</h4>
+    <p>New Balance running Shoes</p>
+    <div class="stars">★★★★★</div>
+     <div class="price">
+  <span class="old">₹2,999</span>
+  ₹2,580
+  </div>
+  </div>
+</a>
+    <!-- card 5 -->
+    <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'Nike2',
+    title: 'Nike Sport Shoes',
+    price: 2599,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp',
+    brand: 'Nike',
+    description: 'Step into comfort and performance with these Reebok sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Nike2',
+        title: 'Nike Sport Shoes',
+        price: 2599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Nike2',
+        title: 'Nike Sport Shoes',
+        price: 2599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Nike</h4>
+    <p>Nike Sport Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹3,599</span>
+  ₹2,599
+  </div>
+  </div>
+</a>
+
+
+
+    <!-- Copy and modify for more products -->
+  </div>  
+  </div>
+</section>
+<!-- Poster -->
+
+<section class="banner">
+  <div class="banner-text">
+    <h4>Suggested For You</h4>
+    <h1>Campus North<br>Running Shoes<br>For Men</h1>
+    <a href="shop.html"><button>Shop Now</button></a>
+  </div>
+  <div class="banner-image">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1749753924/freepik__a-pair-of-blue-sneakers-floating-above-a-gradient-__85161-removebg-preview_qkufda.png" alt="Campus North Running Shoes">
+  </div>
+</section>
+
+<!-- features -->
+ <section class="features-section">
+  <div class="feature-card">
+    <div class="icon-box">
+      <i class="fas fa-globe"></i>
+    </div>
+    <h4>Global Reach</h4>
+    <p>We ship to over 200 countries worldwide with no hidden fees.</p>
+  </div>
+  <div class="feature-card">
+    <div class="icon-box">
+      <i class="fas fa-hand-holding-usd"></i>
+    </div>
+    <h4>Easy Refunds</h4>
+    <p>Hassle-free returns and full money-back guarantee within 7 days.</p>
+  </div>
+  <div class="feature-card">
+    <div class="icon-box">
+      <i class="fas fa-tags"></i>
+    </div>
+    <h4>Exclusive Deals</h4>
+    <p>Enjoy regular discounts and loyalty rewards on every purchase.</p>
+  </div>
+  <div class="feature-card">
+    <div class="icon-box">
+      <i class="fas fa-headset"></i>
+    </div>
+    <h4>Live Assistance</h4>
+    <p>24/7 customer support with real humans, not bots.</p>
+  </div>
+</section>
+
+<!-- deal of the week section -->
+ <section class="deal-of-week" id="dealofweek">
+  <h2>DEAL OF THE WEEK</h2>
+  <div class="carousel-wrapper">
+    <div class="products-container">
+       <!-- card 1 -->
+<a class="product-card">
+  <div class="product-image" onclick="goToProductPage()">
+    <img src="https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg" alt="Shoe Back" class="img-back">
+    
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'reebok1',
+        title: 'Reebok Running Shoes',
+        price: 2599,
+        image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'reebok1',
+        title: 'Reebok Running Shoes',
+        price: 2599,
+        image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>reebok</h4>
+    <p>Reebok Running Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹3,599</span>
+  ₹2,599
+  </div>
+  </div>
+</a>
+
+    <!-- card 2 -->
+    <a class="product-card">
+  <div class="product-image" onclick="goToProductPage()">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484820/shoe_5.2_f1ws7j.jpg" alt="Shoe Back" class="img-back">
+    
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Puma1',
+        title: 'Puma Running Shoes',
+        price: 1599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Puma1',
+        title: 'Puma Running Shoes',
+        price: 1599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Puma</h4>
+    <p>Puma Running Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹2,599</span>
+  ₹1,599
+  </div>
+  </div>
+</a>
+
+
+    <!-- card 3 -->
+     <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'Adidas2',
+    title: 'Adidas Sport Shoes',
+    price: 1799,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg',
+    brand: 'Adidas',
+    description: 'Step into comfort and performance with these Adidas sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Adidas2',
+        title: 'Adidas Sport Shoes',
+        price: 1799,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Adidas2',
+        title: 'Adidas Sport Shoes',
+        price: 1799,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Adidas</h4>
+    <p>Adidas Sport Shoes</p>
+    <div class="stars">★★★★★</div>
+     <div class="price">
+  <span class="old">₹2,599</span>
+  ₹1,799
+  </div>
+  </div>
+</a>
+
+    <!-- card 4 -->
+   <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'New Balance2',
+    title: 'New Balance running Shoes',
+    price: 2580,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484483/shoe3.2_txen1i.jpg',
+    brand: 'New Balance',
+    description: 'Step into comfort and performance with these Adidas sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484483/shoe3.2_txen1i.jpg" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'New Balance2',
+        title: 'New Balance Running Shoes',
+        price:2580,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'New Balance2',
+        title: 'New Balance Running Shoes',
+        price: 2580,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>New Balance</h4>
+    <p>New Balance running Shoes</p>
+    <div class="stars">★★★★★</div>
+     <div class="price">
+  <span class="old">₹2,999</span>
+  ₹2,580
+  </div>
+  </div>
+</a>
+    <!-- card 5 -->
+    <a class="product-card">
+  <div class="product-image" onclick="viewProduct({
+    id: 'Nike2',
+    title: 'Nike Sport Shoes',
+    price: 2599,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp',
+    brand: 'Nike',
+    description: 'Step into comfort and performance with these Reebok sport shoes designed for all-day wear.'
+  })">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg" alt="Shoe Front" class="img-front">
+    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp" alt="Shoe Back" class="img-back">
+
+    <div class="icon">
+      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'Nike2',
+        title: 'Nike Sport Shoes',
+        price: 2599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg'
+      })"></i>
+
+      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+        id: 'Nike2',
+        title: 'Nike Sport Shoes',
+        price: 2599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg'
+      })"></i>
+    </div>
+
+    <div class="discount-badge">-9%</div>
+  </div>
+
+  <div class="product-info">
+    <h4>Nike</h4>
+    <p>Nike Sport Shoes</p>
+    <div class="stars">★★★★★</div>
+    <div class="price">
+  <span class="old">₹3,599</span>
+  ₹2,599
+  </div>
+  </div>
+</a>
+    <!-- Copy and modify for more products -->
+  </div>  
+  </div>
+</section>
+
+
+<!-- testimonial  -->
+<section class="testimonials-section" id="testimonial">
+  <h2>What Our Customers Say</h2>
+  <div class="testimonial-carousel" id="testimonialCarousel">
+    <div class="testimonial active">
+      <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Customer 1">
+      <p>“The shoes I bought are super comfy and stylish. I wear them every day!”</p>
+      <div class="stars">★★★★★</div>
+      <h4>- Ayesha K.</h4>
+    </div>
+    <div class="testimonial">
+      <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Customer 2">
+      <p>“Fast delivery and amazing quality. My favorite shoe brand now!”</p>
+      <div class="stars">★★★★☆</div>
+      <h4>- Arman S.</h4>
+    </div>
+    <div class="testimonial">
+      <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Customer 3">
+      <p>“Great service and the shoes are exactly like shown. Very happy!”</p>
+      <div class="stars">★★★★★</div>
+      <h4>- Sara T.</h4>
+    </div>
+  </div>
+  <div class="testimonial-dots">
+    <span class="dot active" onclick="showTestimonial(0)"></span>
+    <span class="dot" onclick="showTestimonial(1)"></span>
+    <span class="dot" onclick="showTestimonial(2)"></span>
+  </div>
+</section>
+
+<!-- banner cards -->
+<section class="product-banner-section">
+  <!-- Left Banner -->
+  <div class="product-banner-card banner-left">
+    <div class="text-content">
+      <span class="tag">SPECIAL EDITION</span>
+      <h2 class="title">Big Fox<br>Men Light Sneakers</h2>
+      <a href="shop.html" class="btn-shop">SHOP NOW</a>
+    </div>
+  </div>
+
+  <!-- Right Banner -->
+  <div class="product-banner-card banner-right">
+    <div class="text-content">
+      <span class="tag">BEST QUALITY</span>
+      <h2 class="title">Red Tape<br>Athleisure Shoes</h2>
+      <a href="shop.html" class="btn-shop">SHOP NOW</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- blogs -->
+ <section class="blog-section" id="blogSection">
+  <h2 class="blog-title">Our Latest Sneaker Blogs</h2>
+  <div class="blog-carousel-wrapper">
+    <button class="carousel-btn left" onclick="scrollBlog(-1)">&#10094;</button>
+    <div class="blog-carousel" id="blogCarousel">
+
+      <!-- Blog Card 1 -->
+      <div class="blog-card">
+        <div class="blog-image" style="background-image: url('https://res.cloudinary.com/dxtmzketd/image/upload/v1750485851/shoes_6_z52xrt.jpg');"></div>
+        <div class="blog-content">
+          <span class="blog-date">March 10, 2025</span>
+          <h3>How Lightweight Sneakers Boost Performance</h3>
+          <p>Modern sneaker materials reduce weight while keeping support—ideal for runners and daily wearers.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Blog Card 2 -->
+      <div class="blog-card">
+        <div class="blog-image" style="background-image: url('https://res.cloudinary.com/dxtmzketd/image/upload/v1750486086/SHOES_7_kseugt.avif');"></div>
+        <div class="blog-content">
+          <span class="blog-date">March 10, 2025</span>
+          <h3>Choosing the Right Sneakers for Your Lifestyle</h3>
+          <p>From gym sessions to casual wear, discover sneakers that suit both comfort and style needs.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Blog Card 3 -->
+      <div class="blog-card">
+        <div class="blog-image" style="background-image: url('https://img.freepik.com/free-photo/sport-running-shoes_1203-3414.jpg');"></div>
+        <div class="blog-content">
+          <span class="blog-date">March 10, 2025</span>
+          <h3>Why Proper Sneakers Matter for Your Health</h3>
+          <p>Supportive sneakers prevent injury and improve your posture—learn how to choose the right ones.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Blog Card 4 -->
+      <div class="blog-card">
+        <div class="blog-image" style="background-image: url('https://img.freepik.com/free-photo/close-up-futuristic-sneakers-urban-setting_23-2151005699.jpg');"></div>
+        <div class="blog-content">
+          <span class="blog-date">March 9, 2025</span>
+          <h3>Top Sneaker Picks for 2025</h3>
+          <p>Explore this year's best-selling sneakers loved by athletes and fashion-forward users alike.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Blog Card 5 -->
+      <div class="blog-card">
+        <div class="blog-image" style="background-image: url('https://img.freepik.com/premium-photo/low-section-man-footpath_1048944-16544160.jpg');"></div>
+        <div class="blog-content">
+          <span class="blog-date">March 8, 2025</span>
+          <h3>Street Style Sneaker Inspiration</h3>
+          <p>See how fashion influencers pair iconic sneakers with bold, everyday outfits.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Blog Card 6 -->
+      <div class="blog-card">
+        <div class="blog-image" style="background-image: url('https://img.freepik.com/free-photo/close-up-white-futuristic-sneakers_23-2151005681.jpg');"></div>
+        <div class="blog-content">
+          <span class="blog-date">March 7, 2025</span>
+          <h3>The Rise of Bold Color Sneakers</h3>
+          <p>Explore how neon and bold-toned sneakers are defining 2025's fashion trends.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Blog Card 7 -->
+      <div class="blog-card">
+        <div class="blog-image" style="background-image: url('https://img.freepik.com/free-photo/close-up-futuristic-sneakers-showcase_23-2151005684.jpg');"></div>
+        <div class="blog-content">
+          <span class="blog-date">March 6, 2025</span>
+          <h3>Sneakers for Gym vs. Street</h3>
+          <p>Compare gym-specific sneaker features with everyday comfort designs for casual walking.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </div>
+
+    </div>
+    <button class="carousel-btn right" onclick="scrollBlog(1)">&#10095;</button>
+  </div>
+</section>
+
+<!-- newsletter -->
+ <section class="newsletter-section" id="newsletter">
+  <div class="newsletter-overlay">
+    <h2>JOIN OUR NEWSLETTER</h2>
+    <p>Subscribe to our latest newsletter to get news about special discounts.</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- footer section -->
+
+<footer class="footer-section" id="contactSection">
+  <div class="footer-container">
+    <!-- About -->
+    <div class="footer-col about">
+      <h2 class="footer-logo">SneakWear</h2>
+      <p>Your ultimate destination for stylish and comfortable sneakers. Step into comfort and confidence every day.</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="Shop.html">Shop</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li><a href="favorite.html">Favorites</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class="footer-col">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="#dealofweek">Running Shoes</a></li>
+        <li><a href="#popularProducts">Casual Sneakers</a></li>
+        <li><a href="#">Sports Shoes</a></li>
+        <li><a href="#">High Tops</a></li>
+        <li><a href="#">Special Edition</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col contact">
+      <h3>Contact Us</h3>
+      <p><i class="fas fa-map-marker-alt"></i> Hyderabad, India</p>
+      <p><i class="fas fa-phone-alt"></i> +91 xxxxx xxxxx</p>
+      <p><i class="fas fa-envelope"></i> support@sneakwear.com</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 SneakWear. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
