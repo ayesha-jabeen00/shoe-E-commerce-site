@@ -580,23 +580,22 @@ body {
     font-size: 1rem;
   }
 }
-/* brand name */
+/* brand carousel */
+
 .brand-carousel {
   width: 100%;
   overflow: hidden;
   background: #fff;
   padding: 30px 0;
+  position: relative;
 }
 
 .brand-track {
   display: flex;
   gap: 60px;
   align-items: center;
-  transform: translateX(0); /* Initial position */
-}
-
-.brand-carousel:hover .brand-track {
-  animation: scroll 10s linear infinite;
+  width: max-content;
+  animation: scrollLeft 20s linear infinite;
 }
 
 .brand-track img {
@@ -611,24 +610,40 @@ body {
   filter: grayscale(0%);
 }
 
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-/* Responsive */
+/* RESPONSIVE */
 @media (max-width: 768px) {
+  .brand-carousel {
+    overflow: hidden;
+  }
+
   .brand-track {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    animation: scrollLeftMobile 25s linear infinite;
+  }
+
+  @keyframes scrollLeftMobile {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 
   .brand-track img {
-    flex: none;
-    scroll-snap-align: center;
+    flex-shrink: 0;
   }
 }
+
+
 /* latest product */
 .latest-products {
   padding: 40px;

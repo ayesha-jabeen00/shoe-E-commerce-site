@@ -66,6 +66,7 @@ setInterval(() => {
   moveToSlide(currentSlide);
 }, 5000);
 
+
 // ✅ Toast Notification (used for cart & favorites)
 function showToast(message) {
   const toast = document.createElement("div");
