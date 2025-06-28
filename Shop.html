@@ -1,380 +1,745 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shop Page with Filters</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-   
-  <style>
-    :root {
-      --primary: #f24e4e;
-      --bg: #fff;
-      --text: #222;
-      --accent: #555;
-      --card-hover: #f9f9f9;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f1f1f1;
-      color: var(--text);
-    }
-    header {
-      background: url('https://images.pexels.com/photos/28144050/pexels-photo-28144050.jpeg') no-repeat center/cover;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    header h1 {
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      padding: 10px 30px;
-      border-radius: 12px;
-    }
-    .breadcrumb {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: #fff;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  color: #222;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.3s;
-}
-.breadcrumb:hover {
-  background: #eee;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Page with Filters</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-    .container {
-      display: flex;
-      padding: 20px;
-      gap: 20px;
-    }
-    aside {
-      width: 250px;
-      background: var(--bg);
-      padding: 20px;
-      border-radius: 12px;
-    }
-    .filter-group { margin-bottom: 20px; }
-    .filter-header {
-      font-weight: 600;
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-    .filter-content label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-    input[type="range"] { width: 100%; }
-    .products { flex: 1; }
-    .search-bar {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .search-bar input,
-    .search-bar select {
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .product-card {
-      background: var(--bg);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: 0.3s ease;
-      position: relative;
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    }
-    .product-image {
-      position: relative;
-      height: 250px;
-      overflow: hidden;
-    }
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .image-icons {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      display: flex;
-      gap: 8px;
-    }
-    .image-icons a {
-      background: rgba(255,255,255,0.9);
-      padding: 8px;
-      border-radius: 50%;
-      color: #333;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    .image-icons a:hover {
-      background: var(--primary);
-      color: #fff;
-      transform: scale(1.1);
-    }
-    .product-info {
-      padding: 10px;
-      text-align: center;
-    }
-    .product-info h4 { margin-bottom: 5px; font-size: 16px; }
-    .stars { color: gold; font-size: 14px; }
-    .price { font-weight: bold; color: var(--primary); }
-   @keyframes fadein {
-  from { opacity: 0; bottom: 10px; }
-  to { opacity: 1; bottom: 30px; }
-}
-   @keyframes fadeout {
-  from { opacity: 1; bottom: 30px; }
-  to { opacity: 0; bottom: 10px; }
-}
- 
-  @media (max-width: 600px) {
-  .container {
-    flex-direction: column;
-  }
+    <style>
+      :root {
+        --primary: #f24e4e;
+        --bg: #fff;
+        --text: #222;
+        --accent: #555;
+        --card-hover: #f9f9f9;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #f1f1f1;
+        color: var(--text);
+      }
+      header {
+        background: url("https://images.pexels.com/photos/28144050/pexels-photo-28144050.jpeg")
+          no-repeat center/cover;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      header h1 {
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 10px 30px;
+        border-radius: 12px;
+      }
+      .breadcrumb {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #fff;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+      .breadcrumb:hover {
+        background: #eee;
+      }
 
-  aside {
-    width: 100%;
-  }
+      .container {
+        display: flex;
+        padding: 20px;
+        gap: 20px;
+      }
+      aside {
+        width: 250px;
+        background: var(--bg);
+        padding: 20px;
+        border-radius: 12px;
+      }
+      .filter-group {
+        margin-bottom: 20px;
+      }
+      .filter-header {
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      .filter-content label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+      input[type="range"] {
+        width: 100%;
+      }
+      .products {
+        flex: 1;
+      }
+      .search-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .search-bar input,
+      .search-bar select {
+        padding: 10px;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .product-card {
+        background: var(--bg);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: 0.3s ease;
+        position: relative;
+      }
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+      .product-image {
+        position: relative;
+        height: 250px;
+        overflow: hidden;
+      }
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .image-icons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 8px;
+      }
+      .image-icons a {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 8px;
+        border-radius: 50%;
+        color: #333;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .image-icons a:hover {
+        background: var(--primary);
+        color: #fff;
+        transform: scale(1.1);
+      }
+      .product-info {
+        padding: 10px;
+        text-align: center;
+      }
+      .product-info h4 {
+        margin-bottom: 5px;
+        font-size: 16px;
+      }
+      .stars {
+        color: gold;
+        font-size: 14px;
+      }
+      .price {
+        font-weight: bold;
+        color: var(--primary);
+      }
+      @keyframes fadein {
+        from {
+          opacity: 0;
+          bottom: 10px;
+        }
+        to {
+          opacity: 1;
+          bottom: 30px;
+        }
+      }
+      @keyframes fadeout {
+        from {
+          opacity: 1;
+          bottom: 30px;
+        }
+        to {
+          opacity: 0;
+          bottom: 10px;
+        }
+      }
 
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+      @media (max-width: 600px) {
+        .container {
+          flex-direction: column;
+        }
 
-  </style>
-</head>
-<body>
-  <header>
-    <a href="index.html" class="breadcrumb">Home / Shop</a>
-    <h1>Shop Page</h1>
-  </header>
-  <div class="container">
-    <aside>
-      <div class="filter-group">
-        <div class="filter-header">Brand</div>
-        <div class="filter-content">
-          <label><input type="checkbox" class="brand-filter" value="Nike"> Nike</label>
-          <label><input type="checkbox" class="brand-filter" value="Adidas"> Adidas</label>
-          <label><input type="checkbox" class="brand-filter" value="Puma"> Puma</label>
+        aside {
+          width: 100%;
+        }
+
+        .product-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="breadcrumb">Home / Shop</a>
+      <h1>Shop Page</h1>
+    </header>
+    <div class="container">
+      <aside>
+        <div class="filter-group">
+          <div class="filter-header">Brand</div>
+          <div class="filter-content">
+            <label
+              ><input type="checkbox" class="brand-filter" value="Nike" />
+              Nike</label
+            >
+            <label
+              ><input type="checkbox" class="brand-filter" value="Adidas" />
+              Adidas</label
+            >
+            <label
+              ><input type="checkbox" class="brand-filter" value="Puma" />
+              Puma</label
+            >
+          </div>
         </div>
-      </div>
-      <div class="filter-group">
-        <div class="filter-header">Size</div>
-        <div class="filter-content">
-          <label><input type="checkbox" class="size-filter" value="S"> S</label>
-          <label><input type="checkbox" class="size-filter" value="M"> M</label>
-          <label><input type="checkbox" class="size-filter" value="L"> L</label>
+        <div class="filter-group">
+          <div class="filter-header">Size</div>
+          <div class="filter-content">
+            <label
+              ><input type="checkbox" class="size-filter" value="S" /> S</label
+            >
+            <label
+              ><input type="checkbox" class="size-filter" value="M" /> M</label
+            >
+            <label
+              ><input type="checkbox" class="size-filter" value="L" /> L</label
+            >
+          </div>
         </div>
-      </div>
-      <div class="filter-group">
-        <div class="filter-header">Color</div>
-        <div class="filter-content">
-          <label><input type="checkbox" class="color-filter" value="White"> White</label>
-          <label><input type="checkbox" class="color-filter" value="Black"> Black</label>
-          <label><input type="checkbox" class="color-filter" value="Red"> Red</label>
+        <div class="filter-group">
+          <div class="filter-header">Color</div>
+          <div class="filter-content">
+            <label
+              ><input type="checkbox" class="color-filter" value="White" />
+              White</label
+            >
+            <label
+              ><input type="checkbox" class="color-filter" value="Black" />
+              Black</label
+            >
+            <label
+              ><input type="checkbox" class="color-filter" value="Red" />
+              Red</label
+            >
+          </div>
         </div>
-      </div>
-      <div class="filter-group">
-        <div class="filter-header">Price</div>
-        <div class="filter-content">
-          <input type="range" id="priceRange" min="1000" max="7000" value="7000">
-          <p>Max Price: ₹<span id="priceValue">7000</span></p>
+        <div class="filter-group">
+          <div class="filter-header">Price</div>
+          <div class="filter-content">
+            <input
+              type="range"
+              id="priceRange"
+              min="1000"
+              max="7000"
+              value="7000"
+            />
+            <p>Max Price: ₹<span id="priceValue">7000</span></p>
+          </div>
         </div>
+      </aside>
+      <div class="products">
+        <div class="search-bar">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search products..."
+          />
+          <select id="sortSelect">
+            <option value="">Sort By</option>
+            <option value="lowToHigh">Price: Low to High</option>
+            <option value="highToLow">Price: High to Low</option>
+          </select>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
       </div>
-    </aside>
-    <div class="products">
-      <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Search products...">
-        <select id="sortSelect">
-          <option value="">Sort By</option>
-          <option value="lowToHigh">Price: Low to High</option>
-          <option value="highToLow">Price: High to Low</option>
-        </select>
-      </div>
-      <div class="product-grid" id="productGrid"></div>
     </div>
-  </div>
     <!-- Popup Message Box -->
-<div id="popupMessage" style="
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-size: 15px;
-  display: none;
-  z-index: 9999;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  animation: fadein 0.3s ease, fadeout 0.3s ease 2.2s;
-">
-  Message
-</div>
+    <div
+      id="popupMessage"
+      style="
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #333;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 15px;
+        display: none;
+        z-index: 9999;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: fadein 0.3s ease, fadeout 0.3s ease 2.2s;
+      "
+    >
+      Message
+    </div>
 
-  <script>
-    const products = [
-      { name: "Nike Air Max", brand: "Nike", size: "M", color: "White", price: 2499, rating: 5, img: "https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Adidas Ultraboost", brand: "Adidas", size: "L", color: "Black", price: 3999, rating: 4, img: "https://res.cloudinary.com/dxtmzketd/image/upload/v1750612120/pexels-victor-filemon-lopez-sanchez-3289921-15036819_aamld9.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Puma Ignite", brand: "Puma", size: "S", color: "Red", price: 2999, rating: 4, img: "https://images.pexels.com/photos/5240052/pexels-photo-5240052.jpeg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Reebok Nano", brand: "Reebok", size: "M", color: "Gray", price: 3599, rating: 4, img: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "puma", brand: "puma", size: "S", color: "White", price: 2799, rating: 3, img: "https://images.pexels.com/photos/18368130/pexels-photo-18368130.jpeg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "New Balance 574", brand: "New Balance", size: "L", color: "Blue", price: 3999, rating: 5, img: "https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/29542102/2024/10/21/28a603be-2e5b-43a8-9f66-e038f492659c1729494951105-New-Balance-720-Casual-Shoes-8051729494950728-1.jpg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "puma", brand: "puma", size: "M", color: "Black", price: 4299, rating: 4, img: "https://img.freepik.com/premium-photo/black-leather-men-s-sneakers-isolated-black-grunge-background-sports-shoes_154092-28301.jpg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "ASICS Gel-Kayano", brand: "ASICS", size: "M", color: "Gray", price: 4999, rating: 5, img: "https://img.freepik.com/free-photo/close-up-futuristic-sneakers_23-2151005654.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Nike", brand: "Nike", size: "L", color: "Blue", price: 3199, rating: 3, img: "https://images.pexels.com/photos/13580514/pexels-photo-13580514.jpeg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Jordan Retro", brand: "Nike", size: "S", color: "Red", price: 6499, rating: 5, img: "https://images.pexels.com/photos/4490019/pexels-photo-4490019.jpeg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Nike Air Max", brand: "Nike", size: "M", color: "White", price: 2499, rating: 5, img: "https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Adidas Ultraboost", brand: "Adidas", size: "L", color: "Black", price: 3999, rating: 4, img: "https://res.cloudinary.com/dxtmzketd/image/upload/v1750612120/pexels-victor-filemon-lopez-sanchez-3289921-15036819_aamld9.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Puma Ignite", brand: "Puma", size: "S", color: "Red", price: 2999, rating: 4, img: "https://images.pexels.com/photos/5240052/pexels-photo-5240052.jpeg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Reebok Nano", brand: "Reebok", size: "M", color: "Gray", price: 3599, rating: 4, img: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "puma", brand: "puma", size: "S", color: "White", price: 2799, rating: 3, img: "https://images.pexels.com/photos/18368130/pexels-photo-18368130.jpeg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "New Balance 574", brand: "New Balance", size: "L", color: "Blue", price: 3999, rating: 5, img: "https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/29542102/2024/10/21/28a603be-2e5b-43a8-9f66-e038f492659c1729494951105-New-Balance-720-Casual-Shoes-8051729494950728-1.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "puma", brand: "puma", size: "M", color: "Black", price: 4299, rating: 4, img: "https://img.freepik.com/premium-photo/black-leather-men-s-sneakers-isolated-black-grunge-background-sports-shoes_154092-28301.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "ASICS Gel-Kayano", brand: "ASICS", size: "M", color: "Gray", price: 4999, rating: 5, img: "https://img.freepik.com/free-photo/close-up-futuristic-sneakers_23-2151005654.jpg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Nike Air Max", brand: "Nike", size: "M", color: "White", price: 2499, rating: 5, img: "https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Adidas Ultraboost", brand: "Adidas", size: "L", color: "Black", price: 3999, rating: 4, img: "https://res.cloudinary.com/dxtmzketd/image/upload/v1750612120/pexels-victor-filemon-lopez-sanchez-3289921-15036819_aamld9.jpg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Puma Ignite", brand: "Puma", size: "S", color: "Red", price: 2999, rating: 4, img: "https://images.pexels.com/photos/5240052/pexels-photo-5240052.jpeg" ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "Reebok Nano", brand: "Reebok", size: "M", color: "Gray", price: 3599, rating: 4, img: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "puma", brand: "puma", size: "S", color: "White", price: 2799, rating: 3, img: "https://images.pexels.com/photos/18368130/pexels-photo-18368130.jpeg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "New Balance 574", brand: "New Balance", size: "L", color: "Blue", price: 3999, rating: 5, img: "https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/29542102/2024/10/21/28a603be-2e5b-43a8-9f66-e038f492659c1729494951105-New-Balance-720-Casual-Shoes-8051729494950728-1.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "puma", brand: "puma", size: "M", color: "Black", price: 4299, rating: 4, img: "https://img.freepik.com/premium-photo/black-leather-men-s-sneakers-isolated-black-grunge-background-sports-shoes_154092-28301.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-      { name: "ASICS Gel-Kayano", brand: "ASICS", size: "M", color: "Gray", price: 4999, rating: 5, img: "https://img.freepik.com/free-photo/close-up-futuristic-sneakers_23-2151005654.jpg"  ,description: "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear."},
-   
-      
-    ];
+    <script>
+      const products = [
+        {
+          name: "Nike Air Max",
+          brand: "Nike",
+          size: "M",
+          color: "White",
+          price: 2499,
+          rating: 5,
+          img: "https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Adidas Ultraboost",
+          brand: "Adidas",
+          size: "L",
+          color: "Black",
+          price: 3999,
+          rating: 4,
+          img: "https://res.cloudinary.com/dxtmzketd/image/upload/v1750612120/pexels-victor-filemon-lopez-sanchez-3289921-15036819_aamld9.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Puma Ignite",
+          brand: "Puma",
+          size: "S",
+          color: "Red",
+          price: 2999,
+          rating: 4,
+          img: "https://images.pexels.com/photos/5240052/pexels-photo-5240052.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Reebok Nano",
+          brand: "Reebok",
+          size: "M",
+          color: "Gray",
+          price: 3599,
+          rating: 4,
+          img: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "puma",
+          brand: "puma",
+          size: "S",
+          color: "White",
+          price: 2799,
+          rating: 3,
+          img: "https://images.pexels.com/photos/18368130/pexels-photo-18368130.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "New Balance 574",
+          brand: "New Balance",
+          size: "L",
+          color: "Blue",
+          price: 3999,
+          rating: 5,
+          img: "https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/29542102/2024/10/21/28a603be-2e5b-43a8-9f66-e038f492659c1729494951105-New-Balance-720-Casual-Shoes-8051729494950728-1.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "puma",
+          brand: "puma",
+          size: "M",
+          color: "Black",
+          price: 4299,
+          rating: 4,
+          img: "https://img.freepik.com/premium-photo/black-leather-men-s-sneakers-isolated-black-grunge-background-sports-shoes_154092-28301.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "ASICS Gel-Kayano",
+          brand: "ASICS",
+          size: "M",
+          color: "Gray",
+          price: 4999,
+          rating: 5,
+          img: "https://img.freepik.com/free-photo/close-up-futuristic-sneakers_23-2151005654.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Nike",
+          brand: "Nike",
+          size: "L",
+          color: "Blue",
+          price: 3199,
+          rating: 3,
+          img: "https://images.pexels.com/photos/13580514/pexels-photo-13580514.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Jordan Retro",
+          brand: "Nike",
+          size: "S",
+          color: "Red",
+          price: 6499,
+          rating: 5,
+          img: "https://images.pexels.com/photos/4490019/pexels-photo-4490019.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Nike Air Max",
+          brand: "Nike",
+          size: "M",
+          color: "White",
+          price: 2499,
+          rating: 5,
+          img: "https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Adidas Ultraboost",
+          brand: "Adidas",
+          size: "L",
+          color: "Black",
+          price: 3999,
+          rating: 4,
+          img: "https://res.cloudinary.com/dxtmzketd/image/upload/v1750612120/pexels-victor-filemon-lopez-sanchez-3289921-15036819_aamld9.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Puma Ignite",
+          brand: "Puma",
+          size: "S",
+          color: "Red",
+          price: 2999,
+          rating: 4,
+          img: "https://images.pexels.com/photos/5240052/pexels-photo-5240052.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Reebok Nano",
+          brand: "Reebok",
+          size: "M",
+          color: "Gray",
+          price: 3599,
+          rating: 4,
+          img: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "puma",
+          brand: "puma",
+          size: "S",
+          color: "White",
+          price: 2799,
+          rating: 3,
+          img: "https://images.pexels.com/photos/18368130/pexels-photo-18368130.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "New Balance 574",
+          brand: "New Balance",
+          size: "L",
+          color: "Blue",
+          price: 3999,
+          rating: 5,
+          img: "https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/29542102/2024/10/21/28a603be-2e5b-43a8-9f66-e038f492659c1729494951105-New-Balance-720-Casual-Shoes-8051729494950728-1.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "puma",
+          brand: "puma",
+          size: "M",
+          color: "Black",
+          price: 4299,
+          rating: 4,
+          img: "https://img.freepik.com/premium-photo/black-leather-men-s-sneakers-isolated-black-grunge-background-sports-shoes_154092-28301.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "ASICS Gel-Kayano",
+          brand: "ASICS",
+          size: "M",
+          color: "Gray",
+          price: 4999,
+          rating: 5,
+          img: "https://img.freepik.com/free-photo/close-up-futuristic-sneakers_23-2151005654.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Nike Air Max",
+          brand: "Nike",
+          size: "M",
+          color: "White",
+          price: 2499,
+          rating: 5,
+          img: "https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Adidas Ultraboost",
+          brand: "Adidas",
+          size: "L",
+          color: "Black",
+          price: 3999,
+          rating: 4,
+          img: "https://res.cloudinary.com/dxtmzketd/image/upload/v1750612120/pexels-victor-filemon-lopez-sanchez-3289921-15036819_aamld9.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Puma Ignite",
+          brand: "Puma",
+          size: "S",
+          color: "Red",
+          price: 2999,
+          rating: 4,
+          img: "https://images.pexels.com/photos/5240052/pexels-photo-5240052.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "Reebok Nano",
+          brand: "Reebok",
+          size: "M",
+          color: "Gray",
+          price: 3599,
+          rating: 4,
+          img: "https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "puma",
+          brand: "puma",
+          size: "S",
+          color: "White",
+          price: 2799,
+          rating: 3,
+          img: "https://images.pexels.com/photos/18368130/pexels-photo-18368130.jpeg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "New Balance 574",
+          brand: "New Balance",
+          size: "L",
+          color: "Blue",
+          price: 3999,
+          rating: 5,
+          img: "https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/29542102/2024/10/21/28a603be-2e5b-43a8-9f66-e038f492659c1729494951105-New-Balance-720-Casual-Shoes-8051729494950728-1.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "puma",
+          brand: "puma",
+          size: "M",
+          color: "Black",
+          price: 4299,
+          rating: 4,
+          img: "https://img.freepik.com/premium-photo/black-leather-men-s-sneakers-isolated-black-grunge-background-sports-shoes_154092-28301.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+        {
+          name: "ASICS Gel-Kayano",
+          brand: "ASICS",
+          size: "M",
+          color: "Gray",
+          price: 4999,
+          rating: 5,
+          img: "https://img.freepik.com/free-photo/close-up-futuristic-sneakers_23-2151005654.jpg",
+          description:
+            "Experience all-day comfort with Nike Air Max. Designed for style and performance, these sneakers combine lightweight cushioning with bold streetwear flair. Perfect for both workouts and everyday wear.",
+        },
+      ];
+      // Save product data for recommendation section in product.html
+      localStorage.setItem("allShopProducts", JSON.stringify(products));
 
-    let filtered = [...products];
-    const productGrid = document.getElementById("productGrid");
-    const priceRange = document.getElementById("priceRange");
-    const priceValue = document.getElementById("priceValue");
-    const searchInput = document.getElementById("searchInput");
-    const sortSelect = document.getElementById("sortSelect");
-function renderProducts(data) {
-  productGrid.innerHTML = data.map((p, index) => `
-    <div class="product-card" data-index="${index}" onclick='viewProduct(${JSON.stringify(p).replace(/'/g, "&apos;")})'>
+      let filtered = [...products];
+      const productGrid = document.getElementById("productGrid");
+      const priceRange = document.getElementById("priceRange");
+      const priceValue = document.getElementById("priceValue");
+      const searchInput = document.getElementById("searchInput");
+      const sortSelect = document.getElementById("sortSelect");
+      function renderProducts(data) {
+        productGrid.innerHTML = data
+          .map(
+            (p, index) => `
+    <div class="product-card" data-index="${index}" onclick='viewProduct(${JSON.stringify(
+              p
+            ).replace(/'/g, "&apos;")})'>
       <div class="product-image">
         <img src="${p.img}" alt="${p.name}">
         <div class="image-icons">
-          <a href="#" onclick='event.stopPropagation(); addToFavorites(${JSON.stringify(p).replace(/'/g, "&apos;")})'><i class="fas fa-heart"></i></a>
-          <a href="#" onclick='event.stopPropagation(); addToCart(${JSON.stringify(p).replace(/'/g, "&apos;")})'><i class="fas fa-cart-plus"></i></a>
+          <a href="#" onclick='event.stopPropagation(); addToFavorites(${JSON.stringify(
+            p
+          ).replace(/'/g, "&apos;")})'><i class="fas fa-heart"></i></a>
+          <a href="#" onclick='event.stopPropagation(); addToCart(${JSON.stringify(
+            p
+          ).replace(/'/g, "&apos;")})'><i class="fas fa-cart-plus"></i></a>
         </div>
       </div>
       <div class="product-info">
         <h4>${p.name}</h4>
-        <div class="stars">${"★".repeat(p.rating)}${"☆".repeat(5 - p.rating)}</div>
+        <div class="stars">${"★".repeat(p.rating)}${"☆".repeat(
+              5 - p.rating
+            )}</div>
         <p class="price">₹${p.price}</p>
       </div>
     </div>
-  `).join('');
-}
+  `
+          )
+          .join("");
+      }
 
+      function addToFavorites(product) {
+        let favs = JSON.parse(localStorage.getItem("favorites")) || [];
+        if (!favs.some((p) => p.name === product.name)) {
+          favs.push(product);
+          localStorage.setItem("favorites", JSON.stringify(favs));
+          showPopup(" Added to Favorites");
+        } else {
+          showPopup("Already in Favorites");
+        }
+      }
 
-  function addToFavorites(product) {
-  let favs = JSON.parse(localStorage.getItem("favorites")) || [];
-  if (!favs.some(p => p.name === product.name)) {
-    favs.push(product);
-    localStorage.setItem("favorites", JSON.stringify(favs));
-    showPopup(" Added to Favorites");
-  } else {
-    showPopup("Already in Favorites");
-  }
-}
+      function addToCart(product) {
+        const formatted = {
+          id: product.id || "",
+          name: product.name || product.title || "Unnamed",
+          img: product.img || product.image || "",
+          imageBack: product.imageBack || "",
+          price: product.price || 0,
+          rating: product.rating || 0,
+          brand: product.brand || "",
+          size: product.size || "",
+          color: product.color || "",
+          description: product.description || "No description",
+        };
 
-function addToCart(product) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  if (!cart.some(p => p.name === product.name)) {
-    cart.push(product);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showPopup(" Added to Cart");
-  } else {
-    showPopup("Already in Cart");
-  }
-}
-   function showPopup(message) {
-  const popup = document.getElementById("popupMessage");
-  popup.textContent = message;
-  popup.style.display = "block";
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 2500);
-}
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
- 
-    function applyFilters() {
-      const brandFilters = [...document.querySelectorAll('.brand-filter:checked')].map(e => e.value);
-      const sizeFilters = [...document.querySelectorAll('.size-filter:checked')].map(e => e.value);
-      const colorFilters = [...document.querySelectorAll('.color-filter:checked')].map(e => e.value);
-      const maxPrice = parseInt(priceRange.value);
-      const search = searchInput.value.toLowerCase();
+        if (!cart.some((p) => p.name === formatted.name)) {
+          cart.push(formatted);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          showPopup("Added to Cart");
+        } else {
+          showPopup("Already in Cart");
+        }
+      }
 
-      filtered = products.filter(p =>
-        (!brandFilters.length || brandFilters.includes(p.brand)) &&
-        (!sizeFilters.length || sizeFilters.includes(p.size)) &&
-        (!colorFilters.length || colorFilters.includes(p.color)) &&
-        p.price <= maxPrice &&
-        p.name.toLowerCase().includes(search)
-      );
-      applySort();
-    }
+      function showPopup(message) {
+        const popup = document.getElementById("popupMessage");
+        popup.textContent = message;
+        popup.style.display = "block";
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 2500);
+      }
 
-    function applySort() {
-      const val = sortSelect.value;
-      if (val === "lowToHigh") filtered.sort((a, b) => a.price - b.price);
-      if (val === "highToLow") filtered.sort((a, b) => b.price - a.price);
-      renderProducts(filtered);
-    }
+      function applyFilters() {
+        const brandFilters = [
+          ...document.querySelectorAll(".brand-filter:checked"),
+        ].map((e) => e.value);
+        const sizeFilters = [
+          ...document.querySelectorAll(".size-filter:checked"),
+        ].map((e) => e.value);
+        const colorFilters = [
+          ...document.querySelectorAll(".color-filter:checked"),
+        ].map((e) => e.value);
+        const maxPrice = parseInt(priceRange.value);
+        const search = searchInput.value.toLowerCase();
 
-    priceRange.addEventListener("input", () => {
-      priceValue.textContent = priceRange.value;
+        filtered = products.filter(
+          (p) =>
+            (!brandFilters.length || brandFilters.includes(p.brand)) &&
+            (!sizeFilters.length || sizeFilters.includes(p.size)) &&
+            (!colorFilters.length || colorFilters.includes(p.color)) &&
+            p.price <= maxPrice &&
+            p.name.toLowerCase().includes(search)
+        );
+        applySort();
+      }
+
+      function applySort() {
+        const val = sortSelect.value;
+        if (val === "lowToHigh") filtered.sort((a, b) => a.price - b.price);
+        if (val === "highToLow") filtered.sort((a, b) => b.price - a.price);
+        renderProducts(filtered);
+      }
+
+      priceRange.addEventListener("input", () => {
+        priceValue.textContent = priceRange.value;
+        applyFilters();
+      });
+
+      searchInput.addEventListener("input", applyFilters);
+      sortSelect.addEventListener("change", applyFilters);
+      document
+        .querySelectorAll(".brand-filter, .size-filter, .color-filter")
+        .forEach((el) => el.addEventListener("change", applyFilters));
+
       applyFilters();
-    });
 
-    searchInput.addEventListener("input", applyFilters);
-    sortSelect.addEventListener("change", applyFilters);
-    document.querySelectorAll('.brand-filter, .size-filter, .color-filter').forEach(el => el.addEventListener("change", applyFilters));
-
-    applyFilters();
-
- function viewProduct(product) {
-  const formatted = {
-    id: product.id || "",
-    img: product.img || product.image || "",
-    imageBack: product.imageBack || "",
-    name: product.name || product.title || "No Title",
-    price: product.price || 0,
-    description: product.description || "No description available"
-  };
-  localStorage.setItem("selectedProduct", JSON.stringify(formatted));
-  location.href = "product.html";
-}
-
-
-     
-  </script>
-</body>
+      function viewProduct(product) {
+        const formatted = {
+          id: product.id || "",
+          img: product.img || product.image || "",
+          imageBack: product.imageBack || "",
+          name: product.name || product.title || "No Title",
+          price: product.price || 0,
+          description: product.description || "No description available",
+        };
+        localStorage.setItem("selectedProduct", JSON.stringify(formatted));
+        location.href = "product.html";
+      }
+    </script>
+  </body>
 </html>

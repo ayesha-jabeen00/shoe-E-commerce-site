@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - SneakWear</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #f24e4e;
+      --primary-dark: #0f0f0f;
+      --secondary-dark: #1a1a1a;
+      --text-light: #cccccc;
+      --text-dark: #333333;
+      --bg-light: #f7f9fc;
+      --white: #ffffff;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .home-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, var(--primary-red), #ff6b6b);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Particle Background */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(242, 78, 78, 0.6);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 1s; }
+    .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 2s; }
+    .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 0.5s; }
+    .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 1.5s; }
+    .particle:nth-child(6) { width: 6px; height: 6px; left: 60%; animation-delay: 2.5s; }
+    .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 3s; }
+    .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-delay: 0.8s; }
+    .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 1.8s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, #000 100%);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(242, 78, 78, 0.1) 0%, transparent 70%);
+      animation: rotateBg 20s linear infinite;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--primary-red), #ff6b6b, #ffa726);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInDown 1s ease forwards, glow 2s ease-in-out infinite alternate;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      animation: fadeInUp 1.2s ease forwards;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--primary-red), #ff6b6b);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1.4s ease forwards;
+      box-shadow: 0 4px 15px rgba(242, 78, 78, 0.3);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(242, 78, 78, 0.4);
+    }
+
+
+    /* About Sections */
+    .about-section {
+      padding: 100px 0;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .about-section.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-section:nth-child(even) {
+      background: var(--white);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--primary-red);
+      margin-bottom: 20px;
+      font-weight: 800;
+      position: relative;
+    }
+
+    .about-text h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 4px;
+      background: linear-gradient(135deg, var(--primary-red), #ff6b6b);
+      border-radius: 2px;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    .about-text ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about-text li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+
+    .about-text li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--primary-red);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .about-text li:hover {
+      color: var(--primary-red);
+      transform: translateX(5px);
+    }
+
+    .about-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      transition: all 0.4s ease;
+    }
+
+    .about-image:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transition: all 0.4s ease;
+      border-radius: 20px;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+      color: var(--white);
+      padding: 100px 0;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .stats-section.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 40px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(242, 78, 78, 0.1), transparent);
+      transition: all 0.6s ease;
+    }
+
+    .stat-card:hover::before {
+      left: 100%;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      background: rgba(242, 78, 78, 0.1);
+      border-color: var(--primary-red);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--primary-red);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      background: #000;
+      color: var(--white);
+      text-align: center;
+      padding: 60px 0;
+      position: relative;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
+    }
+
+    .footer p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Animations */
+    @keyframes rotateBg {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 20px rgba(242, 78, 78, 0.5); }
+      to { text-shadow: 0 0 30px rgba(242, 78, 78, 0.8); }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-10px); }
+      60% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .about-section {
+        padding: 60px 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .stat-card {
+        padding: 30px 20px;
+      }
+
+      .hero {
+        min-height: 80vh;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(242, 78, 78, 0.3);
+      border-top: 3px solid var(--primary-red);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Hero Section -->
+   <a href="index.html" class="home-btn">← Home</a>
+
+  <section class="hero">
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="hero-content">
+      <h1>About <strong>SneakWear</strong></h1>
+      <p>Redefining streetwear with comfort, style, and performance that moves with your ambition.</p>
+      <a href="#mission" class="hero-cta">
+        <span>Our Story</span>
+        <span>↓</span>
+      </a>
+    </div>
+    <div class="scroll-indicator"></div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="about-section fade-in" id="mission">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>Our Mission</h2>
+          <p>
+            At SneakWear, we believe that great shoes are more than just footwear—they're a statement of who you are and where you're going. We craft each pair with meticulous attention to detail, combining cutting-edge technology with timeless design.
+          </p>
+          <p>
+            Our mission is to empower individuals by blending the perfect fusion of comfort and fashion, creating sneakers that don't just look incredible but feel amazing every step of the way.
+          </p>
+        </div>
+        <div class="about-image">
+          <img src="https://images.pexels.com/photos/8871469/pexels-photo-8871469.jpeg" alt="Mission Image" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="about-section fade-in">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-image">
+          <img src="https://images.pexels.com/photos/2385477/pexels-photo-2385477.jpeg" alt="Our Story" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h2>Our Story</h2>
+          <p>
+            Founded in 2022 by a group of passionate sneakerheads who believed the industry needed a fresh perspective, SneakWear started as a small project in a garage. We weren't satisfied with the status quo—we wanted to create something different.
+          </p>
+          <p>
+            Today, we're a globally recognized brand trusted by athletes, creators, and fashion enthusiasts across six continents. Our journey from local startup to international phenomenon proves that when passion meets purpose, anything is possible.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="about-section fade-in">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>Why Choose SneakWear?</h2>
+          <ul>
+            <li>Innovative designs that blend contemporary trends with timeless appeal</li>
+            <li>Premium materials engineered for all-day comfort and durability</li>
+            <li>Global reach with a commitment to local community values</li>
+            <li>Sustainable practices that protect our planet for future generations</li>
+            <li>Uncompromising quality control ensuring every pair meets our standards</li>
+            <li>Customer-first approach with lifetime support and satisfaction guarantee</li>
+          </ul>
+        </div>
+        <div class="about-image">
+          <img src="https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg" alt="Sneaker Quality" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section fade-in">
+    <div class="container">
+      <h2 style="font-size: 3rem; margin-bottom: 20px; font-weight: 800;">Our Impact</h2>
+      <p style="font-size: 1.2rem; color: #ccc; max-width: 600px; margin: 0 auto;">Numbers that tell the story of our global community</p>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number" data-target="25">0</span>
+          <p class="stat-label">Countries Delivered</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" data-target="500">0</span>
+          <p class="stat-label">Thousand Customers</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" data-target="100">0</span>
+          <p class="stat-label">% Satisfaction Rate</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        Experience the revolution of sneakers with <strong style="color: #f24e4e;">SneakWear</strong>.<br>
+        Walk with purpose. Walk with pride. Walk with confidence.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Enhanced Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add stagger delay for multiple elements
+          setTimeout(() => {
+            entry.target.classList.add('animate');
+          }, index * 100);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Enhanced counter animation with easing
+    function animateCounter(element, start, end, duration) {
+      const startTime = performance.now();
+      const range = end - start;
+
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutCubic(progress);
+        const current = Math.floor(start + (range * easedProgress));
+        
+        element.textContent = current;
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          element.textContent = end; // Ensure final value is exact
+        }
+      }
+
+      requestAnimationFrame(updateCounter);
+    }
+
+    // Stats animation
+    const statsSection = document.querySelector('.stats-section');
+    let statsAnimated = false;
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !statsAnimated) {
+        const counters = document.querySelectorAll('.stat-number');
+        
+        counters.forEach((counter, index) => {
+          const target = parseInt(counter.getAttribute('data-target'));
+          setTimeout(() => {
+            animateCounter(counter, 0, target, 2000);
+          }, index * 200);
+        });
+        
+        statsAnimated = true;
+      }
+    }, { threshold: 0.3 });
+
+    statsObserver.observe(statsSection);
+
+    // Parallax effect for hero background
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero');
+      const heroHeight = hero.offsetHeight;
+      
+      if (scrolled < heroHeight) {
+        const parallaxSpeed = scrolled * 0.5;
+        hero.style.transform = `translateY(${parallaxSpeed}px)`;
+      }
+    });
+
+    // Add subtle mouse movement effect to hero
+    document.addEventListener('mousemove', (e) => {
+      const hero = document.querySelector('.hero-content');
+      const x = (e.clientX / window.innerWidth) - 0.5;
+      const y = (e.clientY / window.innerHeight) - 0.5;
+      
+      hero.style.transform = `translateX(${x * 10}px) translateY(${y * 10}px)`;
+    });
+
+    // Image lazy loading enhancement
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.classList.add('loaded');
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+
+    images.forEach(img => imageObserver.observe(img));
+
+    // Add performance optimization
+    let ticking = false;
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateAnimations);
+        ticking = true;
+      }
+    }
+
+    function updateAnimations() {
+      // Update any scroll-based animations here
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', requestTick);
+  </script>
+</body>
+</html>

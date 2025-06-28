@@ -1,115 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Product Detail</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo">SneakWear</div>
 
-<!-- Navbar -->
-<header class="navbar">
-    <div class="logo">SneakWear</div>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="Shop.html">Shop</a>
+        <a href="#blogSection">Blog</a>
+        <div class="dropdown">
+          <a href="#" class="dropdown-toggle" onclick="toggleDropdown()"
+            >Pages <i id="caret" class="fas fa-caret-up"></i
+          ></a>
+          <div id="dropdownMenu" class="dropdown-menu">
+            <a href="#testimonial">Testimonial</a>
+            <a href="#newsletter">Newsletter</a>
+          </div>
+        </div>
+        <a href="#contactSection">Contact</a>
+      </nav>
 
-   <nav class="nav-links" id="navLinks">
-  <a href="index.html">Home</a>
-  <a href="Shop.html">Shop</a>
-  <a href="#blogSection">Blog</a>
-  <div class="dropdown">
-    <a href="#" class="dropdown-toggle" onclick="toggleDropdown()">Pages <i id="caret" class="fas fa-caret-up"></i></a>
-<div id="dropdownMenu" class="dropdown-menu">
-  <a href="#testimonial">Testimonial</a>
-  <a href="#newsletter">Newsletter</a>
-</div>
-  </div>
-  <a href="#contactSection">Contact</a>
-</nav>
+      <!-- MAIN PAGE ICONS -->
+      <div class="icons">
+        <i class="fas fa-search" onclick="toggleSearch()"></i>
+        <i class="fas fa-user" onclick="goToAccount()"></i>
 
+        <!-- Favorite icon -->
+        <a href="favorite.html" class="fav-link" style="position: relative">
+          <i class="fas fa-heart"></i>
+          <span class="fav-count" id="favCount" style="display: none">0</span>
+        </a>
 
-   <!-- MAIN PAGE ICONS -->
-<div class="icons">
-  <i class="fas fa-search" onclick="toggleSearch()"></i>
-  <i class="fas fa-user" onclick="goToAccount()"></i>
+        <!-- Cart icon -->
+        <a href="cart.html" class="cart-link" style="position: relative">
+          <i class="fas fa-shopping-bag" id="cart-icon"></i>
+          <span class="cart-count" id="cart-count" style="display: none"
+            >0</span
+          >
+        </a>
+      </div>
 
-  <!-- Favorite icon -->
-  <a href="favorite.html" class="fav-link" style="position: relative;">
-    <i class="fas fa-heart"></i>
-    <span class="fav-count" id="favCount" style="display: none;" >0</span>
-  </a>
+      <!-- Search bar -->
+      <div class="search-container" id="searchBox">
+        <input type="text" placeholder="Search products..." />
+      </div>
 
-  <!-- Cart icon -->
-  <a href="cart.html" class="cart-link" style="position: relative;">
-    <i class="fas fa-shopping-bag" id="cart-icon"></i>
-    <span class="cart-count" id="cart-count" style="display: none;">0</span>
-  </a>
-</div>
+      <div class="hamburger" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>
 
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+      <div class="product-gallery">
+        <img src="" alt="Product" class="product-main-img" id="mainImage" />
+        <div class="product-thumbnails">
+          <img id="thumb1" onclick="changeImage(this.src)" />
+          <img id="thumb2" onclick="changeImage(this.src)" />
+        </div>
+      </div>
 
-    <!-- Search bar -->
-    <div class="search-container" id="searchBox">
-      <input type="text" placeholder="Search products..." />
-    </div>
+      <div class="product-info-panel">
+        <h2 class="product-title" id="productTitle">Loading...</h2>
+        <div class="product-price" id="productPrice"></div>
 
-    <div class="hamburger" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-</header>
+        <div class="product-size-select">
+          <label for="size">Size:</label>
+          <select id="size">
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+        </div>
 
+        <div class="product-qty-select">
+          <label>Quantity:</label>
+          <button onclick="changeQty(-1)">-</button>
+          <input type="text" id="qty" value="1" readonly />
+          <button onclick="changeQty(1)">+</button>
+        </div>
 
-<!-- Product Detail Section -->
-<section class="product-detail-section">
-  <div class="product-gallery">
-    <img src="" alt="Product" class="product-main-img" id="mainImage">
-    <div class="product-thumbnails">
-      <img id="thumb1" onclick="changeImage(this.src)">
-      <img id="thumb2" onclick="changeImage(this.src)">
-    </div>
-  </div>
+        <div class="product-buttons">
+          <button
+            class="btn-add-cart"
+            onclick="addToCart(event, selectedProduct)"
+          >
+            Add to Cart
+          </button>
+          <button class="btn-buy-now">Buy Now</button>
+        </div>
 
-  <div class="product-info-panel">
-    <h2 class="product-title" id="productTitle">Loading...</h2>
-    <div class="product-price" id="productPrice"></div>
+        <div class="product-description">
+          <h4 class="desc-heading">Product Description</h4>
+          <p class="desc-text" id="productDesc"></p>
+        </div>
+      </div>
+    </section>
 
-    <div class="product-size-select">
-      <label for="size">Size:</label>
-      <select id="size">
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-        <option>10</option>
-      </select>
-    </div>
+    <!-- Product Tabs Section -->
+    <section class="product-tabs-section">
+      <div class="tab-header">
+        <button class="tab-btn active" onclick="openTab(event, 'descTab')">
+          Description
+        </button>
+        <button class="tab-btn" onclick="openTab(event, 'infoTab')">
+          Additional Info
+        </button>
+        <button class="tab-btn" onclick="openTab(event, 'policyTab')">
+          Privacy Policy
+        </button>
+      </div>
 
-    <div class="product-qty-select">
-      <label>Quantity:</label>
-      <button onclick="changeQty(-1)">-</button>
-      <input type="text" id="qty" value="1" readonly>
-      <button onclick="changeQty(1)">+</button>
-    </div>
+      <div class="tab-body">
+        <div id="descTab" class="tab-panel active">
+          <h3>Product Description</h3>
+          <div class="desc-wrapper">
+            <p id="descText" class="collapsed">
+              <strong>Unmatched Comfort & Performance:</strong><br />
+              Step into comfort, style, and performance with our signature
+              athletic sneakers. Designed for everyday wear, these sneakers
+              combine innovation and aesthetics for people who are always on the
+              move.<br />
+              The breathable mesh upper allows for maximum airflow, keeping your
+              feet cool during intense activities. A lightweight design ensures
+              you're never weighed down and move freely throughout your day.<br />
+              Inside, a memory foam footbed cradles every step and molds to your
+              unique foot shape. Added arch support helps reduce fatigue even
+              after long hours of wear.<br />
+              Whether it's daily commutes or spontaneous adventures, these shoes
+              keep you moving with energy and ease.<br />
 
-    <div class="product-buttons">
-      <button class="btn-add-cart" onclick="addToCart(event, selectedProduct)">Add to Cart</button>
-      <button class="btn-buy-now">Buy Now</button>
-    </div>
+              <strong>Engineered for Durability:</strong><br />
+              The cushioned EVA midsole absorbs impact and protects your joints
+              with every step. Flexible outsoles allow for natural movement and
+              unmatched ground control.<br />
+              Reinforced toe caps extend durability and maintain shape under
+              pressure. The outsole is crafted from anti-slip rubber for better
+              traction on all surfaces.<br />
+              Double-stitched overlays and high-abrasion materials ensure these
+              sneakers can handle the toughest terrains and most active
+              lifestyles.<br />
+              Built to last, tested under extreme conditions for real-world
+              durability.<br />
 
-    <div class="product-description">
-      <h4 class="desc-heading">Product Description</h4>
-      <p class="desc-text" id="productDesc"></p>
-    </div>
-  </div>
-</section>
-  
-<!-- Related Products Section -->
-<section class="related-products-section">
-  <h3 class="related-title">Similar Products</h3>
-  <div class="products-container">
-    <!-- card 1 -->
- <a class="product-card">
-  <div class="product-image" onclick="viewProduct({
+              <strong>Modern Style & Versatility:</strong><br />
+              Stylish enough for casual wear and technical enough for training —
+              the ultimate versatility.<br />
+              Dual-tone colorways offer a clean and modern street-style appeal.
+              Pair with joggers, jeans, or activewear for a bold look.<br />
+              Minimalist silhouette and refined lines make these sneakers the
+              perfect statement piece for any outfit.<br />
+              Whether you’re dressing for a quick gym session or a city stroll,
+              you’ll always step out in confidence.<br />
+
+              <strong>Sustainable & Thoughtful Design:</strong><br />
+              These sneakers are made from vegan-friendly and sustainable
+              materials. Molded sock liners adapt to your foot shape for a
+              custom-fit feel.<br />
+              Delivered in eco-friendly packaging without plastic. Designed in
+              India using global performance insights.<br />
+              We believe style shouldn’t cost the planet — each pair is
+              responsibly crafted using ethical sourcing and low-waste
+              manufacturing.<br />
+              Every element is chosen to ensure maximum function and minimum
+              footprint.<br />
+
+              <strong>Trusted by Thousands:</strong><br />
+              Rated 4.9/5 in comfort and style by thousands of users. Trusted by
+              athletes, influencers, and busy professionals.<br />
+              Customers praise the “walking-on-air” experience they deliver.
+              Backed by hundreds of 5-star reviews and repeat purchases.<br />
+              Join a community of fitness lovers and trendsetters who rely on
+              our shoes for performance and everyday wear.<br />
+              Grab your pair now and take the first step in comfort evolution —
+              satisfaction guaranteed.
+            </p>
+
+            <button id="readMoreBtn" onclick="toggleDescription()">
+              Read more
+            </button>
+          </div>
+        </div>
+
+        <div id="infoTab" class="tab-panel">
+          <h3>Additional Information</h3>
+          <div class="desc-wrapper">
+            <p id="infoText" class="collapsed">
+              <strong>Brand:</strong> SneakWear — a trusted name in sportswear
+              innovation.<br />
+              <strong>Category:</strong> Sneakers / Sportswear — suitable for
+              daily wear, fitness routines, and street style.<br />
+              <strong>Material:</strong> Breathable Mesh Upper, EVA Sole,
+              Ortholite insole for extra comfort.<br />
+              <strong>Color:</strong> Available in Black, White, and Limited
+              Edition colorways.<br />
+              <strong>Sizes:</strong> Men’s: 6–10, Women’s equivalent sizes
+              available.<br />
+              <strong>SKU:</strong> SW-X2025 — unique product code for inventory
+              tracking.<br />
+              <strong>Warranty:</strong> 3-Month manufacturer warranty for sole,
+              stitching, and material defects.<br />
+              <strong>Returns:</strong> 7-Day Easy Return Policy (unused
+              condition with original packaging).<br />
+              <strong>Shipping:</strong> Free shipping on orders above ₹999.
+              Standard delivery in 2–5 working days.<br />
+              <strong>Support:</strong> 24/7 Customer Support available via
+              email and live chat.<br />
+              <strong>Packaging:</strong> Eco-friendly box with minimal plastic
+              use.<br />
+              <strong>Origin:</strong> Proudly designed and assembled in India
+              using globally sourced materials.<br />
+              <strong>Ideal For:</strong> Runners, gym-goers, students, delivery
+              partners, and working professionals.<br />
+              <strong>Cleaning Tips:</strong> Hand wash with mild soap and air
+              dry. Do not bleach or machine wash.<br />
+              <strong>Note:</strong> Size runs true. Please check our fit chart
+              before placing your order.<br />
+            </p>
+            <button class="read-toggle" onclick="toggleText('infoText', this)">
+              Read more
+            </button>
+          </div>
+        </div>
+
+        <div id="policyTab" class="tab-panel">
+          <h3>Privacy Policy</h3>
+          <div class="desc-wrapper">
+            <p id="policyText" class="collapsed">
+              <strong>Our Privacy Commitment:</strong><br />
+              Your privacy is important to us at SneakWear. We are committed to
+              maintaining transparency and control over your personal data.<br />
+              From browsing to checkout, we keep your information encrypted and
+              secure.<br />
+
+              <strong>Data Collection & Usage:</strong><br />
+              We collect minimal necessary information to improve your
+              experience. This may include your name, email, address, and
+              payment details.<br />
+              Cookies are used to personalize your shopping experience and
+              remember your preferences. You can manage or opt out of cookies at
+              any time.<br />
+
+              <strong>Security & Transactions:</strong><br />
+              All transactions are processed through PCI-compliant payment
+              gateways. Your payment information is never stored on our
+              servers.<br />
+              We use SSL encryption to protect your data from unauthorized
+              access.<br />
+
+              <strong>Consent & Control:</strong><br />
+              We do not sell or share your personal data without your explicit
+              consent.<br />
+              You have full rights to request access, export, or deletion of
+              your data at any time. Just contact our support team.<br />
+
+              <strong>Compliance & Updates:</strong><br />
+              Our policies comply with GDPR, Indian IT laws, and global privacy
+              standards.<br />
+              This privacy policy is regularly updated for transparency. Last
+              updated: June 28, 2025.<br />
+              Your trust matters to us — and we promise to guard it with every
+              measure available.
+            </p>
+
+            <button
+              class="read-toggle"
+              onclick="toggleText('policyText', this)"
+            >
+              Read more
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--  Review Section -->
+    <section class="review-section">
+      <div class="review-left">
+        <h2>Leave a Review</h2>
+        <p>Click stars to rate the product</p>
+        <div class="star-rating">
+          <span class="star" data-value="1">★</span>
+          <span class="star" data-value="2">★</span>
+          <span class="star" data-value="3">★</span>
+          <span class="star" data-value="4">★</span>
+          <span class="star" data-value="5">★</span>
+        </div>
+        <p>Share your review about recently purchased product</p>
+        <textarea
+          id="reviewText"
+          placeholder="Write your review here..."
+        ></textarea>
+        <button id="submitReview">Submit Review</button>
+      </div>
+
+      <div class="review-right">
+        <h2>Customer Reviews</h2>
+        <div id="reviewOutput" class="review-list"></div>
+      </div>
+    </section>
+
+    <!-- Related  similar Products Section -->
+    <section class="related-products-section">
+      <h3 class="related-title">Similar Products</h3>
+      <div class="products-container">
+        <!-- card 1 -->
+        <a class="product-card">
+          <div
+            class="product-image"
+            onclick="viewProduct({
     id: 'reebok1',
     title: 'Reebok Running Shoes',
     price: 2599,
@@ -117,43 +330,60 @@
     imageBack: 'https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg',
     brand: 'Reebok',
     description: 'These premium black and white sneakers offer unmatched comfort and style for everyday use or workouts.'
-  })">
-    <img src="https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg" alt="Shoe Front" class="img-front">
-    <img src="https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg" alt="Shoe Back" class="img-back">
+  })"
+          >
+            <img
+              src="https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg"
+              alt="Shoe Front"
+              class="img-front"
+            />
+            <img
+              src="https://img.freepik.com/premium-photo/black-white-sneakers-isolated-black-background_1169993-26.jpg"
+              alt="Shoe Back"
+              class="img-back"
+            />
 
-    <div class="icon">
-      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+            <div class="icon">
+              <i
+                class="fas fa-heart"
+                onclick="event.stopPropagation(); toggleFavorite(this, {
         id: 'reebok1',
         title: 'Reebok Running Shoes',
         price: 2599,
         image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg'
-      })"></i>
+      })"
+              ></i>
 
-      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+              <i
+                class="fas fa-shopping-cart"
+                onclick="event.stopPropagation(); addToCart(event, {
         id: 'reebok1',
         title: 'Reebok Running Shoes',
         price: 2599,
         image: 'https://img.freepik.com/free-photo/new-sneakers_93675-130032.jpg'
-      })"></i>
-    </div>
+      })"
+              ></i>
+            </div>
 
-    <div class="discount-badge">-9%</div>
-  </div>
+            <div class="discount-badge">-9%</div>
+          </div>
 
-  <div class="product-info">
-    <h4>Reebok</h4>
-    <p>Reebok Running Shoes</p>
-    <div class="stars">★★★★★</div>
-    <div class="price">
-  <span class="old">₹3,599</span>
-  ₹2,599
-  </div>
-  </div>
-</a>
+          <div class="product-info">
+            <h4>Reebok</h4>
+            <p>Reebok Running Shoes</p>
+            <div class="stars">★★★★★</div>
+            <div class="price">
+              <span class="old">₹3,599</span>
+              ₹2,599
+            </div>
+          </div>
+        </a>
 
-    <!-- card 2 -->
- <a class="product-card">
-  <div class="product-image" onclick="viewProduct({
+        <!-- card 2 -->
+        <a class="product-card">
+          <div
+            class="product-image"
+            onclick="viewProduct({
     id: 'Adidas2',
     title: 'Adidas Sport Shoes',
     price: 1599,
@@ -161,43 +391,60 @@
     imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg',
     brand: 'Adidas',
     description: 'Step into comfort and performance with these Adidas sport shoes designed for all-day wear.'
-  })">
-    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg" alt="Shoe Front" class="img-front">
-    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg" alt="Shoe Back" class="img-back">
+  })"
+          >
+            <img
+              src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg"
+              alt="Shoe Front"
+              class="img-front"
+            />
+            <img
+              src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750482799/shoes_1_fdk1xc.jpg"
+              alt="Shoe Back"
+              class="img-back"
+            />
 
-    <div class="icon">
-      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+            <div class="icon">
+              <i
+                class="fas fa-heart"
+                onclick="event.stopPropagation(); toggleFavorite(this, {
         id: 'Adidas2',
         title: 'Adidas Sport Shoes',
         price: 1599,
         image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg'
-      })"></i>
+      })"
+              ></i>
 
-      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+              <i
+                class="fas fa-shopping-cart"
+                onclick="event.stopPropagation(); addToCart(event, {
         id: 'Adidas2',
         title: 'Adidas Sport Shoes',
         price: 1599,
         image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750482771/shoes_ailcrl.jpg'
-      })"></i>
-    </div>
+      })"
+              ></i>
+            </div>
 
-    <div class="discount-badge">-9%</div>
-  </div>
+            <div class="discount-badge">-9%</div>
+          </div>
 
-  <div class="product-info">
-    <h4>Adidas</h4>
-    <p>Adidas Sport Shoes</p>
-    <div class="stars">★★★★★</div>
-    <div class="price">
-  <span class="old">₹2,599</span>
-  ₹1,599
-  </div>
-  </div>
-</a>
+          <div class="product-info">
+            <h4>Adidas</h4>
+            <p>Adidas Sport Shoes</p>
+            <div class="stars">★★★★★</div>
+            <div class="price">
+              <span class="old">₹2,599</span>
+              ₹1,599
+            </div>
+          </div>
+        </a>
 
-    <!-- card 3 -->
- <a class="product-card">
-  <div class="product-image" onclick="viewProduct({
+        <!-- card 3 -->
+        <a class="product-card">
+          <div
+            class="product-image"
+            onclick="viewProduct({
     id: 'Nike2',
     title: 'Nike Sport Shoes',
     price: 1799,
@@ -205,129 +452,429 @@
     imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp',
     brand: 'Nike',
     description: 'Step into comfort and performance with these Reebok sport shoes designed for all-day wear.'
-  })">
-    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg" alt="Shoe Front" class="img-front">
-    <img src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp" alt="Shoe Back" class="img-back">
+  })"
+          >
+            <img
+              src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg"
+              alt="Shoe Front"
+              class="img-front"
+            />
+            <img
+              src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484070/shoes_2.3_tdf48e.webp"
+              alt="Shoe Back"
+              class="img-back"
+            />
 
-    <div class="icon">
-      <i class="fas fa-heart" onclick="event.stopPropagation(); toggleFavorite(this, {
+            <div class="icon">
+              <i
+                class="fas fa-heart"
+                onclick="event.stopPropagation(); toggleFavorite(this, {
         id: 'Nike2',
         title: 'Nike Sport Shoes',
         price: 1799,
         image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg'
-      })"></i>
+      })"
+              ></i>
 
-      <i class="fas fa-shopping-cart" onclick="event.stopPropagation(); addToCart(event, {
+              <i
+                class="fas fa-shopping-cart"
+                onclick="event.stopPropagation(); addToCart(event, {
         id: 'Nike2',
         title: 'Nike Sport Shoes',
         price: 1799,
         image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484045/shoess_1.3_lbnxf6.jpg'
-      })"></i>
-    </div>
+      })"
+              ></i>
+            </div>
 
-    <div class="discount-badge">-9%</div>
-  </div>
+            <div class="discount-badge">-9%</div>
+          </div>
 
-  <div class="product-info">
-    <h4>Nike</h4>
-    <p>Nike Sport Shoes</p>
-    <div class="stars">★★★★★</div>
-    <div class="price">
-  <span class="old">₹2,599</span>
-  ₹1,799
-  </div>
-  </div>
-</a>
+          <div class="product-info">
+            <h4>Nike</h4>
+            <p>Nike Sport Shoes</p>
+            <div class="stars">★★★★★</div>
+            <div class="price">
+              <span class="old">₹2,599</span>
+              ₹1,799
+            </div>
+          </div>
+        </a>
+        <!-- card 4 -->
+        <a class="product-card">
+          <div
+            class="product-image"
+            onclick="viewProduct({
+    id: 'New Balance2',
+    title: 'New Balance running Shoes',
+    price: 2880,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484483/shoe3.2_txen1i.jpg',
+    brand: 'New Balance',
+    description: 'Step into comfort and performance with these Adidas sport shoes designed for all-day wear.'
+  })"
+          >
+            <img
+              src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg"
+              alt="Shoe Front"
+              class="img-front"
+            />
+            <img
+              src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484483/shoe3.2_txen1i.jpg"
+              alt="Shoe Back"
+              class="img-back"
+            />
 
-  </div>
-</section>
+            <div class="icon">
+              <i
+                class="fas fa-heart"
+                onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'New Balance2',
+        title: 'New Balance Running Shoes',
+        price: 2880,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg'
+      })"
+              ></i>
 
-<script>
-let qtyInput = document.getElementById("qty");
-let selectedProduct = {
-  id: "",
-  title: "",
-  image: "",
-  price: 0,
-  quantity: 1
-};
+              <i
+                class="fas fa-shopping-cart"
+                onclick="event.stopPropagation(); addToCart(event, {
+        id: 'New Balance2',
+        title: 'New Balance Running Shoes',
+        price: 2880,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484461/shoes_3.1_xkegqk.jpg'
+      })"
+              ></i>
+            </div>
 
-function changeQty(amount) {
-  let qty = parseInt(qtyInput.value);
-  qty = Math.max(1, qty + amount);
-  qtyInput.value = qty;
-  selectedProduct.quantity = qty;
-}
+            <div class="discount-badge">-9%</div>
+          </div>
 
-function changeImage(src) {
-  document.getElementById("mainImage").src = src;
-  selectedProduct.image = src;
-}
+          <div class="product-info">
+            <h4>New Balance</h4>
+            <p>New Balance running Shoes</p>
+            <div class="stars">★★★★★</div>
+            <div class="price">
+              <span class="old">₹2,599</span>
+              ₹2880
+            </div>
+          </div>
+        </a>
+        <!-- card 5 -->
+        <a class="product-card">
+          <div
+            class="product-image"
+            onclick="viewProduct({
+    id: 'Puma1',
+    title: 'puma Running Shoes',
+    price: 2599,
+    image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp',
+    imageBack: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484820/shoe_5.2_f1ws7j.jpg',
+    brand: 'puma',
+    description: 'These premium black and white sneakers offer unmatched comfort and style for everyday use or workouts.'
+  })"
+          >
+            <img
+              src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp"
+              alt="Shoe Front"
+              class="img-front"
+            />
+            <img
+              src="https://res.cloudinary.com/dxtmzketd/image/upload/v1750484820/shoe_5.2_f1ws7j.jpg"
+              alt="Shoe Back"
+              class="img-back"
+            />
 
-// Load product from localStorage
-window.onload = function () {
-  const product = JSON.parse(localStorage.getItem("selectedProduct"));
-  if (product) {
-    document.getElementById("mainImage").src = product.img;
-    document.getElementById("thumb1").src = product.img;
-    document.getElementById("thumb2").src = product.imageBack || product.img;
-    document.getElementById("productTitle").textContent = product.name || product.title;
-    document.getElementById("productPrice").textContent = `₹${product.price}`;
-    document.getElementById("productDesc").textContent = product.description || "";
+            <div class="icon">
+              <i
+                class="fas fa-heart"
+                onclick="event.stopPropagation(); toggleFavorite(this, {
+        id: 'puma1',
+        title: 'puma Running Shoes',
+        price: 2599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp'
+      })"
+              ></i>
 
-    // Corrected selectedProduct format for cart
-    selectedProduct = {
+              <i
+                class="fas fa-shopping-cart"
+                onclick="event.stopPropagation(); addToCart(event, {
+        id: 'puma1',
+        title: 'puma Running Shoes',
+        price: 2599,
+        image: 'https://res.cloudinary.com/dxtmzketd/image/upload/v1750484801/shoe_5.1_ejwwqz.webp'
+      })"
+              ></i>
+            </div>
+
+            <div class="discount-badge">-9%</div>
+          </div>
+
+          <div class="product-info">
+            <h4>Reebok</h4>
+            <p>Reebok Running Shoes</p>
+            <div class="stars">★★★★★</div>
+            <div class="price">
+              <span class="old">₹3,599</span>
+              ₹2,599
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="recommended-section">
+      <h2>Recommended Products</h2>
+      <div id="recommendedProducts" class="recommended-grid"></div>
+    </section>
+
+    <script>
+      let qtyInput = document.getElementById("qty");
+      let selectedProduct = {
+        id: "",
+        title: "",
+        image: "",
+        price: 0,
+        quantity: 1,
+      };
+
+      function changeQty(amount) {
+        let qty = parseInt(qtyInput.value);
+        qty = Math.max(1, qty + amount);
+        qtyInput.value = qty;
+        selectedProduct.quantity = qty;
+      }
+
+      function changeImage(src) {
+        document.getElementById("mainImage").src = src;
+        selectedProduct.image = src;
+      }
+
+      // Load everything on page load
+      window.onload = function () {
+        // --- Load selected product ---
+        const product = JSON.parse(localStorage.getItem("selectedProduct"));
+        if (product) {
+          document.getElementById("mainImage").src =
+            product.img || product.image;
+          document.getElementById("thumb1").src = product.img || product.image;
+          document.getElementById("thumb2").src =
+            product.imageBack || product.img || product.image;
+          document.getElementById("productTitle").textContent =
+            product.name || product.title;
+          document.getElementById(
+            "productPrice"
+          ).textContent = `₹${product.price}`;
+          document.getElementById("productDesc").textContent =
+            product.description || "";
+          document.getElementById("infoBrand").textContent =
+            product.brand || "SneakWear";
+
+          selectedProduct = {
+            id: product.id,
+            title: product.name || product.title,
+            image: product.img || product.image,
+            price: product.price,
+            quantity: 1,
+          };
+        } else {
+          document.getElementById("productTitle").textContent =
+            "Product not found.";
+        }
+
+        // --- Load reviews ---
+        const saved = JSON.parse(localStorage.getItem("reviews")) || [];
+        saved.forEach((r) => renderReview(r.rating, r.text));
+      };
+
+      // Add to Cart button
+     document
+  .querySelector(".btn-buy-now")
+  .addEventListener("click", function () {
+    const qty = parseInt(qtyInput.value);
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+    if (!product) return;
+
+    const item = {
       id: product.id,
       title: product.name || product.title,
       image: product.img || product.image,
       price: product.price,
-      quantity: 1
+      quantity: qty,
     };
-  } else {
-    document.getElementById("productTitle").textContent = "Product not found.";
-  }
-};
 
-function addToCart(event, product) {
-  event.preventDefault();
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const exists = cart.find((p) => p.id === item.id);
+    if (!exists) {
+      cart.push(item);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Product added to cart!");
+    }
+    window.location.href = "cart.html";
+  });
 
-  const exists = cart.find(item => item.id === product.id);
-  if (!exists) {
-    cart.push(product);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Product added to cart!");
-  } else {
-    alert("Product already in cart!");
-  }
-}
+        
 
-document.querySelector(".btn-buy-now").addEventListener("click", function () {
-  selectedProduct.quantity = parseInt(qtyInput.value);
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      // View Product Function
+      function viewProduct(product) {
+        const formatted = {
+          id: product.id || "",
+          img: product.img || product.image || "",
+          imageBack: product.imageBack || "",
+          name: product.name || product.title || "No Title",
+          price: product.price || 0,
+          description: product.description || "No description available",
+        };
+        localStorage.setItem("selectedProduct", JSON.stringify(formatted));
+        location.href = "product.html";
+      }
 
-  const exists = cart.find(item => item.id === selectedProduct.id);
-  if (!exists) {
-    cart.push(selectedProduct);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Product added to cart!");
-  }
+  
 
-  window.location.href = "cart.html";
-});
 
-function viewProduct(product) {
-  const formatted = {
-    id: product.id || "",
-    img: product.img || product.image || "",
-    imageBack: product.imageBack || "",
-    name: product.name || product.title || "No Title",
-    price: product.price || 0,
-    description: product.description || "No description available"
-  };
-  localStorage.setItem("selectedProduct", JSON.stringify(formatted));
-  location.href = "product.html";
-}
-</script>
-</body>
+
+
+
+      // --- Tab Toggle ---
+      function openTab(evt, tabId) {
+        const tabs = document.getElementsByClassName("tab-panel");
+        for (let i = 0; i < tabs.length; i++) {
+          tabs[i].classList.remove("active");
+        }
+        const btns = document.getElementsByClassName("tab-btn");
+        for (let i = 0; i < btns.length; i++) {
+          btns[i].classList.remove("active");
+        }
+        document.getElementById(tabId).classList.add("active");
+        evt.currentTarget.classList.add("active");
+      }
+
+      function toggleDescription() {
+        const desc = document.getElementById("descText");
+        const btn = document.getElementById("readMoreBtn");
+        if (desc.classList.contains("collapsed")) {
+          desc.classList.remove("collapsed");
+          btn.textContent = "Read less";
+        } else {
+          desc.classList.add("collapsed");
+          btn.textContent = "Read more";
+        }
+      }
+
+      function toggleText(id, btn) {
+        const element = document.getElementById(id);
+        if (element.classList.contains("collapsed")) {
+          element.classList.remove("collapsed");
+          btn.textContent = "Read less";
+        } else {
+          element.classList.add("collapsed");
+          btn.textContent = "Read more";
+        }
+      }
+
+      // --- Review Section ---
+      const stars = document.querySelectorAll(".star");
+      const reviewText = document.getElementById("reviewText");
+      const reviewOutput = document.getElementById("reviewOutput");
+      let selectedRating = 0;
+
+      stars.forEach((star) => {
+        star.addEventListener("mouseover", () => {
+          highlightStars(parseInt(star.dataset.value));
+        });
+        star.addEventListener("mouseout", () => {
+          highlightStars(selectedRating);
+        });
+        star.addEventListener("click", () => {
+          selectedRating = parseInt(star.dataset.value);
+          highlightStars(selectedRating);
+        });
+      });
+
+      function highlightStars(count) {
+        stars.forEach((star) => {
+          const val = parseInt(star.dataset.value);
+          star.classList.toggle("selected", val <= count);
+        });
+      }
+
+      document.getElementById("submitReview").addEventListener("click", () => {
+        const text = reviewText.value.trim();
+        if (!selectedRating || !text) {
+          alert("Please provide both star rating and a review!");
+          return;
+        }
+        const review = { rating: selectedRating, text };
+        const stored = JSON.parse(localStorage.getItem("reviews")) || [];
+        stored.unshift(review);
+        localStorage.setItem("reviews", JSON.stringify(stored));
+        renderReview(review.rating, review.text);
+        reviewText.value = "";
+        selectedRating = 0;
+        highlightStars(0);
+      });
+
+      function renderReview(rating, text) {
+        const card = document.createElement("div");
+        card.className = "review-card";
+        const starsHTML = "★".repeat(rating) + "☆".repeat(5 - rating);
+        card.innerHTML = `<div class="stars">${starsHTML}</div><p>${text}</p>`;
+        reviewOutput.prepend(card);
+      }
+
+      // --- Recommended Products ---
+      window.addEventListener("DOMContentLoaded", () => {
+        const selectedProduct = JSON.parse(
+          localStorage.getItem("selectedProduct")
+        );
+        const allProducts =
+          JSON.parse(localStorage.getItem("allShopProducts")) || [];
+
+        if (!selectedProduct || !allProducts.length) return;
+
+        // 1. Try finding matching products by brand, color, or size
+        let recommended = allProducts.filter(
+          (p) =>
+            p.name !== selectedProduct.name &&
+            (p.brand === selectedProduct.brand ||
+              p.color === selectedProduct.color ||
+              p.size === selectedProduct.size)
+        );
+
+        // 2. If not enough matches (like < 4), fill with random others
+        if (recommended.length < 4) {
+          const additional = allProducts
+            .filter(
+              (p) => p.name !== selectedProduct.name && !recommended.includes(p)
+            )
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 4 - recommended.length);
+
+          recommended = [...recommended, ...additional];
+        }
+
+        // Limit total recommendations
+        recommended = recommended.slice(0, 6);
+
+        // 3. Render to DOM
+        const container = document.getElementById("recommendedProducts");
+        container.innerHTML = recommended
+          .map(
+            (p) => `
+    <div class="recommended-card" onclick='viewProduct(${JSON.stringify(p)})'>
+      <img src="${p.img}" alt="${p.name}">
+      <div class="recommended-info">
+        <h4>${p.name}</h4>
+        <div class="stars">${"★".repeat(p.rating)}${"☆".repeat(
+              5 - p.rating
+            )}</div>
+        <p class="price">₹${p.price}</p>
+      </div>
+    </div>
+  `
+          )
+          .join("");
+      });
+    </script>
+  </body>
 </html>

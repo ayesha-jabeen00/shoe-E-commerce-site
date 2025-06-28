@@ -1,10 +1,10 @@
 // Toggle navigation menu
 function toggleMenu() {
-  const nav = document.getElementById('navLinks');
-  nav.classList.toggle('active');
+  const nav = document.getElementById("navLinks");
+  nav.classList.toggle("active");
 }
 // Toggle dropdown menu
- function toggleDropdown() {
+function toggleDropdown() {
   const menu = document.getElementById("dropdownMenu");
   const caret = document.getElementById("caret");
   const isOpen = menu.style.display === "block";
@@ -14,7 +14,7 @@ function toggleMenu() {
 }
 
 // Hide dropdown when clicked outside
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
   const toggle = document.querySelector(".dropdown-toggle");
   const menu = document.getElementById("dropdownMenu");
   const caret = document.getElementById("caret");
@@ -27,8 +27,8 @@ document.addEventListener("click", function(e) {
 
 // Toggle search box
 function toggleSearch() {
-  const searchBox = document.getElementById('searchBox');
-  searchBox.classList.toggle('show');
+  const searchBox = document.getElementById("searchBox");
+  searchBox.classList.toggle("show");
 }
 
 // Redirect to account page
@@ -46,9 +46,9 @@ function goToProductPage() {
   window.location.href = "product-details.html";
 }
 // carousel funtionality
-const track = document.getElementById('track');
-const dots = document.querySelectorAll('.dot');
-const slides = document.querySelectorAll('.carousel-slide');
+const track = document.getElementById("track");
+const dots = document.querySelectorAll(".dot");
+const slides = document.querySelectorAll(".carousel-slide");
 let currentSlide = 0;
 const totalSlides = slides.length;
 
@@ -56,8 +56,8 @@ function moveToSlide(slide) {
   if (track) {
     track.style.transform = `translateX(-${slide * 100}%)`;
   }
-  dots.forEach(dot => dot.classList.remove('active'));
-  if (dots[slide]) dots[slide].classList.add('active');
+  dots.forEach((dot) => dot.classList.remove("active"));
+  if (dots[slide]) dots[slide].classList.add("active");
   currentSlide = slide;
 }
 
@@ -65,7 +65,6 @@ setInterval(() => {
   currentSlide = (currentSlide + 1) % totalSlides;
   moveToSlide(currentSlide);
 }, 5000);
-
 
 // ✅ Toast Notification (used for cart & favorites)
 function showToast(message) {
@@ -81,7 +80,7 @@ function addToCart(event, product) {
   event.stopPropagation();
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  const exists = cart.find(item => item.id === product.id);
+  const exists = cart.find((item) => item.id === product.id);
   if (!exists) {
     cart.push({ ...product, quantity: 1 }); // Add quantity and spread properties
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -106,14 +105,14 @@ function updateCartCount() {
 
 // ✅ Toggle Favorites
 function toggleFavorite(icon, product) {
-  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  const exists = favorites.find(item => item.id === product.id);
+  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const exists = favorites.find((item) => item.id === product.id);
 
   if (!exists) {
     favorites.push(product);
     icon.classList.add("active");
     showToast("Added to Favorites");
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    localStorage.setItem("favorites", JSON.stringify(favorites));
     updateFavCount();
   } else {
     showToast("Already in Favorites");
@@ -122,39 +121,39 @@ function toggleFavorite(icon, product) {
 
 // ✅ Update Favorites Count
 function updateFavCount() {
-  const favCount = document.getElementById('favCount');
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const favCount = document.getElementById("favCount");
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
   if (favCount) {
     favCount.innerText = favorites.length;
-    favCount.style.display = favorites.length > 0 ? 'inline-block' : 'none';
+    favCount.style.display = favorites.length > 0 ? "inline-block" : "none";
   }
 }
 
-// ✅ Cart Page Logic 
-document.addEventListener('DOMContentLoaded', () => {
+// ✅ Cart Page Logic
+document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   updateFavCount();
 
-  const cartContainer = document.getElementById('cart-items');
-  const subtotalEl = document.getElementById('subtotal-amount');
-  let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  const cartContainer = document.getElementById("cart-items");
+  const subtotalEl = document.getElementById("subtotal-amount");
+  let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
   if (cartContainer && subtotalEl) {
     function updateCartUI() {
-      cartContainer.innerHTML = '';
+      cartContainer.innerHTML = "";
       let subtotal = 0;
 
       cartItems.forEach((item, index) => {
         const itemTotal = item.price * item.quantity;
         subtotal += itemTotal;
 
-        const itemEl = document.createElement('div');
-        itemEl.className = 'cart-item';
+        const itemEl = document.createElement("div");
+        itemEl.className = "cart-item";
         itemEl.innerHTML = `
           <img src="${item.image}" alt="${item.name}">
           <div class="cart-details">
-            <h4>${item.brand || 'Brand'}</h4>
+            <h4>${item.brand || "Brand"}</h4>
             <p>${item.name || item.title}</p>
             <div class="cart-price">$${item.price.toFixed(2)}</div>
             <div class="quantity-box">
@@ -176,21 +175,19 @@ document.addEventListener('DOMContentLoaded', () => {
     window.updateQty = function (index, change) {
       cartItems[index].quantity += change;
       if (cartItems[index].quantity < 1) cartItems[index].quantity = 1;
-      localStorage.setItem('cart', JSON.stringify(cartItems));
+      localStorage.setItem("cart", JSON.stringify(cartItems));
       updateCartUI();
     };
 
     window.removeItem = function (index) {
       cartItems.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cartItems));
+      localStorage.setItem("cart", JSON.stringify(cartItems));
       updateCartUI();
     };
 
     updateCartUI();
   }
 });
-
-
 
 function viewProduct(product) {
   const formatted = {
@@ -199,83 +196,82 @@ function viewProduct(product) {
     imageBack: product.imageBack || "",
     name: product.name || product.title || "No Title",
     price: product.price || 0,
-    description: product.description || "No description available"
+    description: product.description || "No description available",
   };
   localStorage.setItem("selectedProduct", JSON.stringify(formatted));
   location.href = "product.html";
 }
 
-
 // features
 
-  const cards = document.querySelectorAll('.animate-on-scroll');
+const cards = document.querySelectorAll(".animate-on-scroll");
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('active');
+        entry.target.classList.add("active");
       }
     });
-  }, {
-    threshold: 0.2
-  });
+  },
+  {
+    threshold: 0.2,
+  }
+);
 
-  cards.forEach(card => observer.observe(card));
+cards.forEach((card) => observer.observe(card));
 
 // testimonial
 
 let currentIndex = 0;
 
 function showTestimonial(index) {
-  const testimonials = document.querySelectorAll('.testimonial');
-  const dots = document.querySelectorAll('.testimonial-dots .dot');
-  testimonials.forEach((t, i) => t.classList.toggle('active', i === index));
-  dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  const testimonials = document.querySelectorAll(".testimonial");
+  const dots = document.querySelectorAll(".testimonial-dots .dot");
+  testimonials.forEach((t, i) => t.classList.toggle("active", i === index));
+  dots.forEach((d, i) => d.classList.toggle("active", i === index));
   currentIndex = index;
 }
 
 // Auto-slide every 5 seconds
 setInterval(() => {
-  currentIndex = (currentIndex + 1) % document.querySelectorAll('.testimonial').length;
+  currentIndex =
+    (currentIndex + 1) % document.querySelectorAll(".testimonial").length;
   showTestimonial(currentIndex);
 }, 5000);
 
 // Show the first testimonial on page load
 showTestimonial(0);
 
-
 // blog
 function scrollBlog(direction) {
-  const container = document.getElementById('blogCarousel');
+  const container = document.getElementById("blogCarousel");
   const scrollAmount = 280;
   container.scrollBy({
     left: direction * scrollAmount,
-    behavior: 'smooth'
+    behavior: "smooth",
   });
 }
 
 function showForm(type) {
-  const loginForm = document.getElementById('loginForm');
-  const signupForm = document.getElementById('signupForm');
-  const loginTab = document.getElementById('loginTab');
-  const signupTab = document.getElementById('signupTab');
+  const loginForm = document.getElementById("loginForm");
+  const signupForm = document.getElementById("signupForm");
+  const loginTab = document.getElementById("loginTab");
+  const signupTab = document.getElementById("signupTab");
 
-  if (type === 'login') {
-    loginForm.classList.add('active');
-    signupForm.classList.remove('active');
-    loginTab.classList.add('active');
-    signupTab.classList.remove('active');
-  } else if (type === 'signup') {
-    loginForm.classList.remove('active');
-    signupForm.classList.add('active');
-    loginTab.classList.remove('active');
-    signupTab.classList.add('active');
+  if (type === "login") {
+    loginForm.classList.add("active");
+    signupForm.classList.remove("active");
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
+  } else if (type === "signup") {
+    loginForm.classList.remove("active");
+    signupForm.classList.add("active");
+    loginTab.classList.remove("active");
+    signupTab.classList.add("active");
   }
 }
 
 function goHome() {
   window.location.href = "index.html"; // change this to your actual home page
 }
-
-
-

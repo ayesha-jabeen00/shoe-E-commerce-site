@@ -185,7 +185,44 @@
         width: 100%;
       }
     }
- 
+    /* Thank You Popup Styles */
+#thankYouModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 20px;
+  color: #222;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  animation: fadeInPop 0.6s ease forwards;
+}
+
+@keyframes fadeInPop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+#thankYouModal i {
+  color: #f24e4e;
+  font-size: 28px;
+  margin-bottom: 10px;
+  display: block;
+}
+
 
   </style>
 </head>
@@ -228,47 +265,55 @@
     </div>
   </div>
 
+
   <!-- JS -->
-  <script>
+<script>
     let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
     let discount = 0;
     let quantities = [];
 
-    function loadCartItems() {
-      const container = document.getElementById("cartItemsContainer");
-      container.innerHTML = "";
-      let subtotal = 0;
-      quantities = [];
+   function loadCartItems() {
+  const container = document.getElementById("cartItemsContainer");
+  container.innerHTML = "";
+  let subtotal = 0;
+  quantities = [];
 
-      if (cartItems.length === 0) {
-        container.innerHTML = `<p>Your cart is empty.</p>`;
-        document.getElementById("subtotal").textContent = "₹0";
-        document.getElementById("total").textContent = "₹0";
-        return;
-      }
+  if (cartItems.length === 0) {
+    container.innerHTML = `<p>Your cart is empty.</p>`;
+    document.getElementById("subtotal").textContent = "₹0";
+    document.getElementById("total").textContent = "₹0";
+    return;
+  }
 
-      cartItems.forEach((item, index) => {
-        quantities[index] = 1;
-        container.innerHTML += `
-          <div class="item" id="item-${index}">
-            <img src="${item.image}" alt="Product Image">
-            <div class="item-details">
-              <div class="item-title">${item.title}</div>
-              <div class="price">₹${item.price}</div>
-            </div>
-            <div class="controls">
-              <button onclick="changeQty(${index}, -1)">-</button>
-              <span id="qty-${index}">1</span>
-              <button onclick="changeQty(${index}, 1)">+</button>
-              <i class="fas fa-trash delete-btn" onclick="removeItem(${index})"></i>
-            </div>
-          </div>
-        `;
-        subtotal += item.price;
-      });
+  cartItems.forEach((item, index) => {
+    // Ensure compatibility with older or mixed structures
+    const name = item.name || item.title || "Product";
+    const img = item.img || item.image || "https://via.placeholder.com/100";
+    const price = item.price || 0;
 
-      updatePrices();
-    }
+    quantities[index] = 1;
+
+    container.innerHTML += `
+      <div class="item" id="item-${index}">
+        <img src="${img}" alt="${name}">
+        <div class="item-details">
+          <div class="item-title">${name}</div>
+          <div class="price">₹${price}</div>
+        </div>
+        <div class="controls">
+          <button onclick="changeQty(${index}, -1)">-</button>
+          <span id="qty-${index}">1</span>
+          <button onclick="changeQty(${index}, 1)">+</button>
+          <i class="fas fa-trash delete-btn" onclick="removeItem(${index})"></i>
+        </div>
+      </div>
+    `;
+    subtotal += price;
+  });
+
+  updatePrices();
+}
+
 
     function changeQty(index, delta) {
       quantities[index] = Math.max(1, quantities[index] + delta);
@@ -318,6 +363,48 @@
     loadCartItems();
   }, 400);
 }
+   
+// Checkout button functionality
+document.addEventListener("DOMContentLoaded", function () {
+  const checkoutBtn = document.querySelector('.checkout-btn');
+
+  checkoutBtn.addEventListener('click', () => {
+    if (cartItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+
+    // Save checkout status
+    localStorage.setItem("checkoutStatus", "success");
+
+    // Clear cart and redirect after animation
+    localStorage.removeItem("cart");
+    cartItems = [];
+    quantities = [];
+    loadCartItems();
+
+    showThankYouPopupAndRedirect();
+  });
+});
+
+function showThankYouPopupAndRedirect() {
+  const modal = document.createElement("div");
+  modal.id = "thankYouModal";
+  modal.innerHTML = `
+    <i class="fas fa-check-circle"></i>
+    <p>🎉 Thank you for shopping with us!</p>
+  `;
+  document.body.appendChild(modal);
+
+  // Wait for 2 seconds, then redirect
+  setTimeout(() => {
+    window.location.href = "thank.u.html";
+  }, 2000);
+}
+
+
+
+
    
   </script>
 </body>
